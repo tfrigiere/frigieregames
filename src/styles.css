@@ -320,3 +320,29 @@
   font-style: italic;
   text-transform: none;
 }
+
+@utility air-shot {
+  background: oklch(0.99 0.005 250);
+}
+
+@utility banner-strip-air {
+  display: block;
+  background: linear-gradient(180deg, oklch(0.32 0.07 258), oklch(0.22 0.06 260));
+  border-top: 1px solid oklch(0.7 0.15 55 / 60%);
+  padding: 0.85rem 3rem 1.6rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: oklch(0.97 0.01 240);
+  text-transform: uppercase;
+}
+
+@utility air-hl {
+  font-size: 1.3em;
+  font-weight: 900;
+  color: oklch(0.7 0.19 25);
+  -webkit-text-stroke: 0.5px oklch(0.98 0.01 60);
+  text-shadow: 0 0 16px oklch(0.7 0.19 25 / 80%), 0 2px 0 oklch(0.3 0.1 28);
+}
