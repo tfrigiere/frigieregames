@@ -117,10 +117,13 @@ const projects: Project[] = [
     beta: true,
     link: "https://companyairports.lovable.app/",
     description: (
-      <p>
-        Un site de type jeu pur qui permet de développer son réseau aérien dans toute la France,
-        c'est un jeu de type « tycoon » et gestion.
-      </p>
+      <>
+        <AirportsGallery />
+        <p>
+          Un site de type jeu pur qui permet de développer son réseau aérien dans toute la France,
+          c'est un jeu de type « tycoon » et gestion.
+        </p>
+      </>
     ),
   },
 ];
