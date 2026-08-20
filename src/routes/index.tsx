@@ -72,6 +72,7 @@ const projects: Project[] = [
     link: "http://sourichatmap.lovable.app/",
     description: (
       <>
+        <SourichatGallery />
         <p>
           Un site uniquement disponible sur mobile pour jouer au jeu du chat et de la souris (jeu
           enfantin) grandeur nature sur grand terrain inspiré par les très célèbres ytbeur{" "}
