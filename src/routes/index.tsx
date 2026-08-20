@@ -4,6 +4,8 @@ import frigiereLogo from "@/assets/frigiere.png.asset.json";
 import mondeLogo from "@/assets/monde.png.asset.json";
 import sourichatLogo from "@/assets/sourichat.png.asset.json";
 import airportsLogo from "@/assets/airports.png.asset.json";
+import { MondeGallery } from "@/components/MondeGallery";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,7 +46,9 @@ const projects: Project[] = [
     link: "https://mondedesgeographes.lovable.app/",
     description: (
       <>
+        <MondeGallery />
         <p>
+
           Un site pour s'entraîner en géographie, il y a plusieurs modes pour apprendre tout en
           s'amusant.
         </p>
