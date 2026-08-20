@@ -106,8 +106,8 @@ export function MondeGallery() {
       >
         <div className="relative max-h-[75vh] w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
           <img
-            src={slides[index].src}
-            alt={slides[index].alt}
+            src={slides[index]!.src}
+            alt={slides[index]!.alt}
             className="max-h-[75vh] w-full rounded-xl border border-border object-contain shadow-elevated"
           />
           <button
