@@ -202,6 +202,38 @@ function Index() {
           })}
         </div>
       </section>
+
+      <section className="mx-auto max-w-3xl px-6 pb-24">
+        <article className="rounded-2xl border border-border bg-card/70 px-6 py-8 shadow-elevated backdrop-blur sm:px-8">
+          <h2 className="text-title-3d text-center text-3xl font-black uppercase tracking-tight sm:text-4xl">
+            À propos du créateur
+          </h2>
+          <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p>
+              Salut ! Je suis un jeune lycéen Auvergnat. Quand je ne suis pas en cours, je m'amuse à
+              mixer mes deux plus grandes passions : la géographie et l'informatique.{" "}
+              <strong className="font-bold text-accent">FRIGIERE.GAMES</strong> est né d'une envie de
+              créer des projets liés à mes passions.
+            </p>
+            <p>
+              Grâce à Lovable, une IA de développement de site, c'est une opportunité de créer des
+              sites plus facilement pour expérimenter plein de petits projets de chambre.
+            </p>
+          </div>
+
+          <h3 className="text-title-3d mt-10 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
+            Note du créateur
+          </h3>
+          <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Le développement de ces petits jeux sert à tuer l'ennui pendant les grandes vacances
+            d'été !
+          </p>
+
+          <p className="mt-8 text-right text-xs font-semibold uppercase tracking-[0.2em] text-accent/80 sm:text-sm">
+            20 Août 2026
+          </p>
+        </article>
+      </section>
     </main>
   );
 }
