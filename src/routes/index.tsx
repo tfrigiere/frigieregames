@@ -221,7 +221,7 @@ function Index() {
             </p>
           </div>
 
-          <h3 className="text-title-3d mt-10 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
+          <h3 className="mt-10 text-center text-lg font-bold uppercase tracking-[0.18em] text-accent drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] sm:text-xl">
             Note du créateur
           </h3>
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
