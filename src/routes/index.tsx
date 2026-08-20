@@ -5,6 +5,7 @@ import mondeLogo from "@/assets/monde.png.asset.json";
 import sourichatLogo from "@/assets/sourichat.png.asset.json";
 import airportsLogo from "@/assets/airports.png.asset.json";
 import { MondeGallery } from "@/components/MondeGallery";
+import { SourichatGallery } from "@/components/SourichatGallery";
 
 
 export const Route = createFileRoute("/")({
