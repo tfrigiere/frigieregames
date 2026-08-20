@@ -8,6 +8,7 @@ import { MondeGallery } from "@/components/MondeGallery";
 import { SourichatGallery } from "@/components/SourichatGallery";
 import { AirportsGallery } from "@/components/AirportsGallery";
 import { PlayButton } from "@/components/PlayButton";
+import { CommentsSection } from "@/components/CommentsSection";
 
 
 
@@ -189,6 +190,8 @@ function Index() {
                     <div className="space-y-4 border-t border-border px-5 py-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
                       {p.description}
                       <PlayButton projectId={p.id} link={p.link} />
+                      <CommentsSection projectId={p.id} />
+
 
                     </div>
                   </div>

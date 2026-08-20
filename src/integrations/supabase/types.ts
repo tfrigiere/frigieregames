@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      project_comments: {
+        Row: {
+          author_name: string
+          created_at: string
+          id: string
+          message: string
+          project_id: string
+        }
+        Insert: {
+          author_name?: string
+          created_at?: string
+          id?: string
+          message: string
+          project_id: string
+        }
+        Update: {
+          author_name?: string
+          created_at?: string
+          id?: string
+          message?: string
+          project_id?: string
+        }
+        Relationships: []
+      }
       project_devices: {
         Row: {
           created_at: string
