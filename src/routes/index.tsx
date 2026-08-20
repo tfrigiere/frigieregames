@@ -186,14 +186,8 @@ function Index() {
                   <div className="overflow-hidden">
                     <div className="space-y-4 border-t border-border px-5 py-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
                       {p.description}
-                      <a
-                        href={p.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-play"
-                      >
-                        ▶ PLAY
-                      </a>
+                      <PlayButton projectId={p.id} link={p.link} />
+
                     </div>
                   </div>
                 </div>
