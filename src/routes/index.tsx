@@ -7,6 +7,8 @@ import airportsLogo from "@/assets/airports.png.asset.json";
 import { MondeGallery } from "@/components/MondeGallery";
 import { SourichatGallery } from "@/components/SourichatGallery";
 import { AirportsGallery } from "@/components/AirportsGallery";
+import { PlayButton } from "@/components/PlayButton";
+
 
 
 export const Route = createFileRoute("/")({
