@@ -50,7 +50,12 @@ export function MondeGallery() {
       >
         {slides.map((s) => (
           <figure key={s.src} className="w-full shrink-0">
-            <img src={s.src} alt={s.alt} className="aspect-[16/10] w-full object-cover object-top" />
+            <img
+              src={s.src}
+              alt={s.alt}
+              onClick={() => setZoom(true)}
+              className="aspect-[16/10] w-full cursor-zoom-in object-cover object-top"
+            />
             <figcaption className="banner-strip">
               {s.before && <span>{s.before}</span>}
               <span className="banner-highlight">{s.highlight}</span>
