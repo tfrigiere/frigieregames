@@ -44,7 +44,9 @@ const projects: Project[] = [
     link: "https://mondedesgeographes.lovable.app/",
     description: (
       <>
+        <MondeGallery />
         <p>
+
           Un site pour s'entraîner en géographie, il y a plusieurs modes pour apprendre tout en
           s'amusant.
         </p>
