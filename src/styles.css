@@ -273,3 +273,52 @@
   backdrop-filter: blur(6px);
   transition: transform 0.15s ease, background 0.15s ease;
 }
+
+@utility souri-shot {
+  background: oklch(0.99 0.01 80);
+}
+
+@utility banner-strip-souri {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.4rem;
+  background: linear-gradient(180deg, oklch(0.55 0.09 60), oklch(0.38 0.07 55));
+  border-top: 1px solid oklch(0.85 0.06 75 / 60%);
+  padding: 0.85rem 3rem 1.6rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: oklch(0.98 0.01 85);
+  text-transform: uppercase;
+}
+
+@utility souri-hl-souris {
+  font-size: 1.3em;
+  font-weight: 900;
+  color: oklch(0.75 0.16 25);
+  text-shadow: 0 0 12px oklch(0.75 0.16 25 / 55%), 0 2px 0 oklch(0.35 0.09 30);
+}
+
+@utility souri-hl-chat {
+  font-size: 1.3em;
+  font-weight: 900;
+  color: oklch(0.7 0.17 255);
+  text-shadow: 0 0 12px oklch(0.7 0.17 255 / 55%), 0 2px 0 oklch(0.32 0.1 260);
+}
+
+@utility souri-hl-theme {
+  font-size: 1.2em;
+  font-weight: 900;
+  color: oklch(0.88 0.11 80);
+  text-shadow: 0 0 12px oklch(0.88 0.11 80 / 55%), 0 2px 0 oklch(0.35 0.07 60);
+}
+
+@utility souri-hl-small {
+  font-size: 0.85em;
+  font-style: italic;
+  text-transform: none;
+}
