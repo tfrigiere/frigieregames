@@ -37,10 +37,12 @@ const slides: Slide[] = [
 
 export function MondeGallery() {
   const [index, setIndex] = useState(0);
+  const [zoom, setZoom] = useState(false);
 
   const go = (dir: number) => setIndex((i) => (i + dir + slides.length) % slides.length);
 
   return (
+    <>
     <div className="relative overflow-hidden rounded-2xl border border-border bg-background/60 shadow-elevated">
       <div
         className="flex transition-transform duration-500 ease-out"
