@@ -6,6 +6,7 @@ import sourichatLogo from "@/assets/sourichat.png.asset.json";
 import airportsLogo from "@/assets/airports.png.asset.json";
 import { MondeGallery } from "@/components/MondeGallery";
 import { SourichatGallery } from "@/components/SourichatGallery";
+import { AirportsGallery } from "@/components/AirportsGallery";
 
 
 export const Route = createFileRoute("/")({
@@ -116,10 +117,13 @@ const projects: Project[] = [
     beta: true,
     link: "https://companyairports.lovable.app/",
     description: (
-      <p>
-        Un site de type jeu pur qui permet de développer son réseau aérien dans toute la France,
-        c'est un jeu de type « tycoon » et gestion.
-      </p>
+      <>
+        <AirportsGallery />
+        <p>
+          Un site de type jeu pur qui permet de développer son réseau aérien dans toute la France,
+          c'est un jeu de type « tycoon » et gestion.
+        </p>
+      </>
     ),
   },
 ];
