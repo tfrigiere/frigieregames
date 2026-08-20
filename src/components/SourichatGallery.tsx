@@ -61,18 +61,21 @@ export function SourichatGallery() {
   const go = (dir: number) => setIndex((i) => (i + dir + slides.length) % slides.length);
 
   const renderCaption = (s: Slide) =>
-    s.parts.map((p, i) =>
-      p.hl ? (
-        <span
-          key={i}
-          className={`souri-hl-${p.hl}${p.small ? " souri-hl-small" : ""}`}
-        >
-          {p.text}
+    s.parts.map((p, i) => {
+      const glue = p.text === "!";
+      return (
+        <span key={i}>
+          {i > 0 && !glue ? " " : ""}
+          {p.hl ? (
+            <span className={`souri-hl-${p.hl}${p.small ? " souri-hl-small" : ""}`}>
+              {p.text}
+            </span>
+          ) : (
+            p.text
+          )}
         </span>
-      ) : (
-        <span key={i}>{p.text}</span>
-      ),
-    );
+      );
+    });
 
   return (
     <>
