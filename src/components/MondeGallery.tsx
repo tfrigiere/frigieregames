@@ -1,7 +1,7 @@
 import { useState } from "react";
-import modesImg from "@/assets/monde-modes.png.asset.json";
+import modesImg from "@/assets/monde-modes-v2.png.asset.json";
 import categoriesImg from "@/assets/monde-categories.png.asset.json";
-import triImg from "@/assets/monde-tri.png.asset.json";
+import triImg from "@/assets/monde-tri-v2.png.asset.json";
 
 type Slide = {
   src: string;
