@@ -293,17 +293,19 @@
 }
 
 @utility souri-hl-souris {
-  font-size: 1.3em;
+  font-size: 1.45em;
   font-weight: 900;
-  color: oklch(0.75 0.16 25);
-  text-shadow: 0 0 12px oklch(0.75 0.16 25 / 55%), 0 2px 0 oklch(0.35 0.09 30);
+  color: oklch(0.62 0.24 27);
+  -webkit-text-stroke: 0.5px oklch(0.98 0.02 85);
+  text-shadow: 0 0 16px oklch(0.62 0.24 27 / 85%), 0 0 32px oklch(0.62 0.24 27 / 55%), 0 2px 0 oklch(0.28 0.12 28);
 }
 
 @utility souri-hl-chat {
-  font-size: 1.3em;
+  font-size: 1.45em;
   font-weight: 900;
-  color: oklch(0.7 0.17 255);
-  text-shadow: 0 0 12px oklch(0.7 0.17 255 / 55%), 0 2px 0 oklch(0.32 0.1 260);
+  color: oklch(0.62 0.22 258);
+  -webkit-text-stroke: 0.5px oklch(0.98 0.02 85);
+  text-shadow: 0 0 16px oklch(0.62 0.22 258 / 85%), 0 0 32px oklch(0.62 0.22 258 / 55%), 0 2px 0 oklch(0.28 0.12 262);
 }
 
 @utility souri-hl-theme {
