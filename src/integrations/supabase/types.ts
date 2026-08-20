@@ -14,13 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      project_devices: {
+        Row: {
+          created_at: string
+          device_id: string
+          project_id: string
+        }
+        Insert: {
+          created_at?: string
+          device_id: string
+          project_id: string
+        }
+        Update: {
+          created_at?: string
+          device_id?: string
+          project_id?: string
+        }
+        Relationships: []
+      }
+      project_stats: {
+        Row: {
+          clicks: number
+          players: number
+          project_id: string
+          updated_at: string
+        }
+        Insert: {
+          clicks?: number
+          players?: number
+          project_id: string
+          updated_at?: string
+        }
+        Update: {
+          clicks?: number
+          players?: number
+          project_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      record_play: {
+        Args: { _device_id: string; _project_id: string }
+        Returns: {
+          clicks: number
+          players: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
