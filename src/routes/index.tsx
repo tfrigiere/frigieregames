@@ -4,6 +4,8 @@ import frigiereLogo from "@/assets/frigiere.png.asset.json";
 import mondeLogo from "@/assets/monde.png.asset.json";
 import sourichatLogo from "@/assets/sourichat.png.asset.json";
 import airportsLogo from "@/assets/airports.png.asset.json";
+import { MondeGallery } from "@/components/MondeGallery";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
