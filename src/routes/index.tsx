@@ -78,6 +78,8 @@ const projects: Project[] = [
     logo: sourichatLogo.url,
     beta: true,
     link: "http://sourichatmap.lovable.app/",
+    platforms: "Téléphone uniquement",
+    langs: ["fr", "en"],
     description: (
       <>
         <SourichatGallery />
@@ -123,6 +125,8 @@ const projects: Project[] = [
     logo: airportsLogo.url,
     beta: true,
     link: "https://companyairports.lovable.app/",
+    platforms: "PC uniquement",
+    langs: ["fr"],
     description: (
       <>
         <AirportsGallery />
