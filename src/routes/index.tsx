@@ -8,6 +8,7 @@ import { MondeGallery } from "@/components/MondeGallery";
 import { SourichatGallery } from "@/components/SourichatGallery";
 import { AirportsGallery } from "@/components/AirportsGallery";
 import { PlayButton } from "@/components/PlayButton";
+import { ProjectConditions } from "@/components/ProjectConditions";
 import { CommentsSection } from "@/components/CommentsSection";
 
 
@@ -40,6 +41,8 @@ type Project = {
   logo: string;
   beta?: boolean;
   link: string;
+  platforms: string;
+  langs: ("fr" | "en")[];
   description: React.ReactNode;
 };
 
@@ -49,6 +52,8 @@ const projects: Project[] = [
     name: "Monde des Géographes",
     logo: mondeLogo.url,
     link: "https://mondedesgeographes.lovable.app/",
+    platforms: "PC & Téléphone",
+    langs: ["fr", "en"],
     description: (
       <>
         <MondeGallery />
@@ -74,6 +79,8 @@ const projects: Project[] = [
     logo: sourichatLogo.url,
     beta: true,
     link: "http://sourichatmap.lovable.app/",
+    platforms: "Téléphone uniquement",
+    langs: ["fr", "en"],
     description: (
       <>
         <SourichatGallery />
@@ -119,6 +126,8 @@ const projects: Project[] = [
     logo: airportsLogo.url,
     beta: true,
     link: "https://companyairports.lovable.app/",
+    platforms: "PC uniquement",
+    langs: ["fr"],
     description: (
       <>
         <AirportsGallery />
@@ -189,6 +198,7 @@ function Index() {
                   <div className="overflow-hidden">
                     <div className="space-y-4 border-t border-border px-5 py-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
                       {p.description}
+                      <ProjectConditions platforms={p.platforms} langs={p.langs} />
                       <PlayButton projectId={p.id} link={p.link} />
                       <CommentsSection projectId={p.id} />
 
