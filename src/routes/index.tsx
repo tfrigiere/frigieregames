@@ -40,6 +40,8 @@ type Project = {
   logo: string;
   beta?: boolean;
   link: string;
+  platforms: string;
+  langs: ("fr" | "en")[];
   description: React.ReactNode;
 };
 
@@ -49,6 +51,8 @@ const projects: Project[] = [
     name: "Monde des Géographes",
     logo: mondeLogo.url,
     link: "https://mondedesgeographes.lovable.app/",
+    platforms: "PC & Téléphone",
+    langs: ["fr", "en"],
     description: (
       <>
         <MondeGallery />
