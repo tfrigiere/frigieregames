@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useLang } from "@/lib/i18n";
 
 const DEVICE_KEY = "frigiere_device_id";
 
@@ -16,6 +17,7 @@ type Stats = { clicks: number; players: number };
 
 export function PlayButton({ projectId, link }: { projectId: string; link: string }) {
   const [stats, setStats] = useState<Stats | null>(null);
+  const { lang, t } = useLang();
 
   useEffect(() => {
     let active = true;
@@ -43,7 +45,7 @@ export function PlayButton({ projectId, link }: { projectId: string; link: strin
       });
   };
 
-  const fmt = (n: number) => n.toLocaleString("fr-FR");
+  const fmt = (n: number) => n.toLocaleString(lang === "fr" ? "fr-FR" : "en-US");
 
   return (
     <a
@@ -53,9 +55,9 @@ export function PlayButton({ projectId, link }: { projectId: string; link: strin
       onClick={handleClick}
       className="btn-play"
     >
-      <span>▶ PLAY</span>
+      <span>▶ {t("play")}</span>
       <span className="play-stats">
-        <span className="play-stat" title="Nombre total de clics dans le monde">
+        <span className="play-stat" title={t("clicksTitle")}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className="play-stat-icon">
             <path
               fill="currentColor"
@@ -64,7 +66,7 @@ export function PlayButton({ projectId, link }: { projectId: string; link: strin
           </svg>
           {stats ? fmt(stats.clicks) : "—"}
         </span>
-        <span className="play-stat" title="Nombre de joueurs uniques">
+        <span className="play-stat" title={t("playersTitle")}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className="play-stat-icon">
             <path
               fill="currentColor"

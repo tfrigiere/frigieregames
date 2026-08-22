@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLang } from "@/lib/i18n";
 import img1 from "@/assets/air-1.png.asset.json";
 import img2 from "@/assets/air-2.png.asset.json";
 import img3 from "@/assets/air-3.png.asset.json";
@@ -10,7 +11,7 @@ type Slide = {
   parts: { text: string; hl?: boolean }[];
 };
 
-const slides: Slide[] = [
+const slidesFr: Slide[] = [
   {
     src: img1.url,
     alt: "Carte de France avec une ligne aérienne entre Lyon et Marseille",
@@ -52,6 +53,7 @@ const slides: Slide[] = [
 ];
 
 export function AirportsGallery() {
+  const { lang, t } = useLang();
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
 
@@ -90,7 +92,7 @@ export function AirportsGallery() {
 
         <button
           type="button"
-          aria-label="Image précédente"
+          aria-label={t("prevImage")}
           onClick={() => go(-1)}
           className="gallery-arrow left-3"
         >
@@ -98,7 +100,7 @@ export function AirportsGallery() {
         </button>
         <button
           type="button"
-          aria-label="Image suivante"
+          aria-label={t("nextImage")}
           onClick={() => go(1)}
           className="gallery-arrow right-3"
         >
@@ -110,7 +112,7 @@ export function AirportsGallery() {
             <button
               key={s.src}
               type="button"
-              aria-label={`Aller à l'image ${i + 1}`}
+              aria-label={`${t("goToImage")} ${i + 1}`}
               onClick={() => setIndex(i)}
               className={`h-2 w-2 rounded-full transition-all ${
                 i === index ? "w-5 bg-accent" : "bg-foreground/40"
@@ -138,7 +140,7 @@ export function AirportsGallery() {
             />
             <button
               type="button"
-              aria-label="Fermer"
+              aria-label={t("close")}
               onClick={() => setZoom(false)}
               className="gallery-arrow -right-2 -top-2 !top-0 translate-x-1/3 -translate-y-1/3 text-xl"
             >
@@ -149,7 +151,7 @@ export function AirportsGallery() {
           <div className="flex items-center gap-6" onClick={(e) => e.stopPropagation()}>
             <button
               type="button"
-              aria-label="Image précédente"
+              aria-label={t("prevImage")}
               onClick={() => go(-1)}
               className="gallery-arrow !static"
             >
@@ -160,7 +162,7 @@ export function AirportsGallery() {
             </span>
             <button
               type="button"
-              aria-label="Image suivante"
+              aria-label={t("nextImage")}
               onClick={() => go(1)}
               className="gallery-arrow !static"
             >

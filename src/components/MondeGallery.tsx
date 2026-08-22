@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLang } from "@/lib/i18n";
 import modesImg from "@/assets/monde-modes-v2.png.asset.json";
 import categoriesImg from "@/assets/monde-categories.png.asset.json";
 import triImg from "@/assets/monde-tri-v2.png.asset.json";
@@ -11,7 +12,7 @@ type Slide = {
   after: string;
 };
 
-const slides: Slide[] = [
+const slidesFr: Slide[] = [
   {
     src: modesImg.url,
     alt: "Accueil du Monde des Géographes avec les différents modes de jeu",
@@ -36,6 +37,7 @@ const slides: Slide[] = [
 ];
 
 export function MondeGallery() {
+  const { lang, t } = useLang();
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
 
@@ -67,7 +69,7 @@ export function MondeGallery() {
 
       <button
         type="button"
-        aria-label="Image précédente"
+        aria-label={t("prevImage")}
         onClick={() => go(-1)}
         className="gallery-arrow left-3"
       >
@@ -75,7 +77,7 @@ export function MondeGallery() {
       </button>
       <button
         type="button"
-        aria-label="Image suivante"
+        aria-label={t("nextImage")}
         onClick={() => go(1)}
         className="gallery-arrow right-3"
       >
@@ -87,7 +89,7 @@ export function MondeGallery() {
           <button
             key={s.src}
             type="button"
-            aria-label={`Aller à l'image ${i + 1}`}
+            aria-label={`${t("goToImage")} ${i + 1}`}
             onClick={() => setIndex(i)}
             className={`h-2 w-2 rounded-full transition-all ${
               i === index ? "w-5 bg-accent" : "bg-foreground/40"
@@ -112,7 +114,7 @@ export function MondeGallery() {
           />
           <button
             type="button"
-            aria-label="Fermer"
+            aria-label={t("close")}
             onClick={() => setZoom(false)}
             className="gallery-arrow -right-2 -top-2 !top-0 translate-x-1/3 -translate-y-1/3 text-xl"
           >
@@ -123,7 +125,7 @@ export function MondeGallery() {
         <div className="flex items-center gap-6" onClick={(e) => e.stopPropagation()}>
           <button
             type="button"
-            aria-label="Image précédente"
+            aria-label={t("prevImage")}
             onClick={() => go(-1)}
             className="gallery-arrow !static"
           >
@@ -134,7 +136,7 @@ export function MondeGallery() {
           </span>
           <button
             type="button"
-            aria-label="Image suivante"
+            aria-label={t("nextImage")}
             onClick={() => go(1)}
             className="gallery-arrow !static"
           >

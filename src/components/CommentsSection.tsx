@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useLang } from "@/lib/i18n";
 
 type Comment = {
   id: string;
@@ -14,6 +15,7 @@ export function CommentsSection({ projectId }: { projectId: string }) {
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { lang, t } = useLang();
 
   useEffect(() => {
     let active = true;
@@ -37,7 +39,7 @@ export function CommentsSection({ projectId }: { projectId: string }) {
     if (!msg) return;
     setSending(true);
     setError(null);
-    const author = name.trim() || "Utilisateur";
+    const author = name.trim() || t("defaultUser");
     const { data, error: err } = await supabase
       .from("project_comments")
       .insert({ project_id: projectId, author_name: author.slice(0, 40), message: msg.slice(0, 1000) })
@@ -45,7 +47,7 @@ export function CommentsSection({ projectId }: { projectId: string }) {
       .single();
     setSending(false);
     if (err || !data) {
-      setError("Impossible d'envoyer le commentaire, réessayez.");
+      setError(t("commentError"));
       return;
     }
     setComments((c) => [data as Comment, ...c]);
@@ -53,7 +55,7 @@ export function CommentsSection({ projectId }: { projectId: string }) {
   };
 
   const fmtDate = (iso: string) =>
-    new Date(iso).toLocaleDateString("fr-FR", {
+    new Date(iso).toLocaleDateString(lang === "fr" ? "fr-FR" : "en-GB", {
       day: "2-digit",
       month: "short",
       year: "numeric",
@@ -64,7 +66,7 @@ export function CommentsSection({ projectId }: { projectId: string }) {
   return (
     <section className="mt-6 rounded-xl border border-border bg-background/40 p-4 sm:p-5">
       <h3 className="text-center text-sm font-bold uppercase tracking-[0.18em] text-accent sm:text-base">
-        Commentaires / Feedback
+        {t("commentsTitle")}
       </h3>
 
       <form onSubmit={submit} className="mt-4 space-y-3">
@@ -73,9 +75,9 @@ export function CommentsSection({ projectId }: { projectId: string }) {
             htmlFor={`name-${projectId}`}
             className="mb-1 block text-xs font-semibold uppercase tracking-wider text-foreground/80"
           >
-            Nom{" "}
+            {t("name")}{" "}
             <span className="font-normal normal-case tracking-normal text-muted-foreground">
-              (laissez vide pour apparaître en tant qu'« Utilisateur »)
+              {t("nameHint")}
             </span>
           </label>
           <input
@@ -83,7 +85,7 @@ export function CommentsSection({ projectId }: { projectId: string }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             maxLength={40}
-            placeholder="Utilisateur"
+            placeholder={t("defaultUser")}
             className="w-full rounded-lg border border-border bg-card/70 px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-accent"
           />
         </div>
@@ -93,7 +95,7 @@ export function CommentsSection({ projectId }: { projectId: string }) {
             htmlFor={`msg-${projectId}`}
             className="mb-1 block text-xs font-semibold uppercase tracking-wider text-foreground/80"
           >
-            Message
+            {t("message")}
           </label>
           <textarea
             id={`msg-${projectId}`}
@@ -101,7 +103,7 @@ export function CommentsSection({ projectId }: { projectId: string }) {
             onChange={(e) => setMessage(e.target.value)}
             maxLength={1000}
             rows={3}
-            placeholder="Votre avis sur ce projet..."
+            placeholder={t("messagePlaceholder")}
             className="w-full resize-y rounded-lg border border-border bg-card/70 px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-accent"
           />
         </div>
@@ -113,14 +115,14 @@ export function CommentsSection({ projectId }: { projectId: string }) {
           disabled={sending || !message.trim()}
           className="rounded-lg border border-accent/50 bg-accent/20 px-4 py-2 text-sm font-bold uppercase tracking-wider text-accent transition-colors hover:bg-accent/30 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {sending ? "Envoi..." : "Publier"}
+          {sending ? t("sending") : t("publish")}
         </button>
       </form>
 
       <ul className="mt-5 space-y-3">
         {comments.length === 0 && (
           <li className="text-center text-xs text-muted-foreground">
-            Aucun commentaire pour l'instant. Soyez le premier !
+{t("noComments")}
           </li>
         )}
         {comments.map((c) => (
