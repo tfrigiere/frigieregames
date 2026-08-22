@@ -449,18 +449,38 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   color: hsl(var(--muted-foreground));
+  opacity: 0.65;
   transition: all 0.2s ease;
 }
 
 .lang-btn:hover {
+  opacity: 1;
   color: hsl(var(--foreground));
   background: color-mix(in oklab, hsl(var(--accent)) 15%, transparent);
 }
 
 @utility lang-btn-active {
-  color: hsl(var(--accent-foreground));
-  background: hsl(var(--accent));
-  box-shadow: 0 0 12px color-mix(in oklab, hsl(var(--accent)) 55%, transparent);
+  position: relative;
+  opacity: 1;
+  color: hsl(var(--primary-foreground));
+  background: linear-gradient(180deg, oklch(0.78 0.13 205), oklch(0.62 0.14 215));
+  box-shadow:
+    0 0 0 2px oklch(0.9 0.08 205 / 55%),
+    0 0 18px oklch(0.72 0.15 210 / 65%),
+    inset 0 1px 0 oklch(1 0 0 / 25%);
+}
+
+.lang-btn-active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: oklch(0.85 0.13 95);
+  box-shadow: 0 0 10px oklch(0.85 0.13 95 / 85%);
 }
 
 @utility lang-flag {
