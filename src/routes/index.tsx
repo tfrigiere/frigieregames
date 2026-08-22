@@ -10,8 +10,8 @@ import { AirportsGallery } from "@/components/AirportsGallery";
 import { PlayButton } from "@/components/PlayButton";
 import { ProjectConditions } from "@/components/ProjectConditions";
 import { CommentsSection } from "@/components/CommentsSection";
-
-
+import { LangSwitch } from "@/components/LangSwitch";
+import { LangProvider, useLang, type fr as FrDict } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,8 +32,10 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: `https://frigiere.games${frigiereLogo.url}` },
     ],
   }),
-  component: Index,
+  component: IndexPage,
 });
+
+type T = (key: keyof typeof FrDict) => string;
 
 type Project = {
   id: string;
@@ -41,9 +43,10 @@ type Project = {
   logo: string;
   beta?: boolean;
   link: string;
-  platforms: string;
+  platforms: (t: T) => string;
   langs: ("fr" | "en")[];
-  description: React.ReactNode;
+  players?: number;
+  description: (t: T) => React.ReactNode;
 };
 
 const projects: Project[] = [
@@ -52,24 +55,16 @@ const projects: Project[] = [
     name: "Monde des Géographes",
     logo: mondeLogo.url,
     link: "https://mondedesgeographes.lovable.app/",
-    platforms: "PC & Téléphone",
+    platforms: (t) => t("platformsMonde"),
     langs: ["fr", "en"],
-    description: (
+    description: (t) => (
       <>
         <MondeGallery />
+        <p>{t("mondeD1")}</p>
         <p>
-
-          Un site pour s'entraîner en géographie, il y a plusieurs modes pour apprendre tout en
-          s'amusant.
+          {t("mondeD2a")} <strong>{t("mondeD2b")}</strong>
         </p>
-        <p>
-          Il y a des missions rapides, des modes journaliers et hebdomadaires ou encore le cœur du
-          site : <strong>LES CATEGORIES</strong>
-        </p>
-        <p>
-          Il y a aussi des bundles pour débloquer de nouvelles catégories plus ciblées sur des
-          régions du monde et donc plus difficiles.
-        </p>
+        <p>{t("mondeD3")}</p>
       </>
     ),
   },
@@ -79,14 +74,14 @@ const projects: Project[] = [
     logo: sourichatLogo.url,
     beta: true,
     link: "http://sourichatmap.lovable.app/",
-    platforms: "Téléphone uniquement",
+    platforms: (t) => t("platformsSouri"),
     langs: ["fr", "en"],
-    description: (
+    players: 2,
+    description: (t) => (
       <>
         <SourichatGallery />
         <p>
-          Un site uniquement disponible sur mobile pour jouer au jeu du chat et de la souris (jeu
-          enfantin) grandeur nature sur grand terrain inspiré par les très célèbres ytbeur{" "}
+          {t("souriD1a")}{" "}
           <a
             href="https://www.youtube.com/@FuzeIII"
             target="_blank"
@@ -95,7 +90,7 @@ const projects: Project[] = [
           >
             Fuze
           </a>{" "}
-          et{" "}
+          {t("souriD1b")}{" "}
           <a
             href="https://www.youtube.com/@Aywen"
             target="_blank"
@@ -104,18 +99,11 @@ const projects: Project[] = [
           >
             Aywen
           </a>
-          . Ce jeu incarne 2 rôles :
+          {t("souriD1c")}
         </p>
         <ul className="list-disc space-y-2 pl-5">
-          <li>
-            Le chat qui a pour but de toucher la souris. Sur son appareil, il a une visualisation
-            d'une zone où se trouve la souris (et pas précisément où elle est) et les dimensions de
-            la zone.
-          </li>
-          <li>
-            La souris, quant à elle, n'a que sa position et les dimensions de la zone, son but est
-            de juste « fuir ».
-          </li>
+          <li>{t("souriLi1")}</li>
+          <li>{t("souriLi2")}</li>
         </ul>
       </>
     ),
@@ -126,26 +114,36 @@ const projects: Project[] = [
     logo: airportsLogo.url,
     beta: true,
     link: "https://companyairports.lovable.app/",
-    platforms: "PC uniquement",
+    platforms: (t) => t("platformsAir"),
     langs: ["fr"],
-    description: (
+    description: (t) => (
       <>
         <AirportsGallery />
-        <p>
-          Un site de type jeu pur qui permet de développer son réseau aérien dans toute la France,
-          c'est un jeu de type « tycoon » et gestion.
-        </p>
+        <p>{t("airD1")}</p>
       </>
     ),
   },
 ];
 
+function IndexPage() {
+  return (
+    <LangProvider>
+      <Index />
+    </LangProvider>
+  );
+}
+
 function Index() {
   const [open, setOpen] = useState<string | null>(null);
+  const { t } = useLang();
 
   return (
     <main className="min-h-screen bg-background bg-hero-glow">
-      <section className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 py-20 md:flex-row md:justify-center md:gap-14 md:py-28">
+      <div className="mx-auto flex max-w-6xl justify-end px-6 pt-5">
+        <LangSwitch />
+      </div>
+
+      <section className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 pb-20 pt-8 md:flex-row md:justify-center md:gap-14 md:pb-28">
         <img
           src={frigiereLogo.url}
           alt="Logo Frigiere.games : cube de cristal glacé en forme de F"
@@ -158,7 +156,9 @@ function Index() {
       </section>
 
       <section className="mx-auto max-w-3xl px-6 pb-24">
-        <h2 className="mb-8 text-center text-2xl font-bold text-foreground/90">Mes projets</h2>
+        <h2 className="mb-8 text-center text-2xl font-bold text-foreground/90">
+          {t("projectsTitle")}
+        </h2>
         <div className="space-y-5">
           {projects.map((p) => {
             const isOpen = open === p.id;
@@ -197,12 +197,14 @@ function Index() {
                 >
                   <div className="overflow-hidden">
                     <div className="space-y-4 border-t border-border px-5 py-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                      {p.description}
-                      <ProjectConditions platforms={p.platforms} langs={p.langs} />
+                      {p.description(t)}
+                      <ProjectConditions
+                        platforms={p.platforms(t)}
+                        langs={p.langs}
+                        players={p.players}
+                      />
                       <PlayButton projectId={p.id} link={p.link} />
                       <CommentsSection projectId={p.id} />
-
-
                     </div>
                   </div>
                 </div>
@@ -215,31 +217,25 @@ function Index() {
       <section className="mx-auto max-w-3xl px-6 pb-24">
         <article className="rounded-2xl border border-border bg-card/70 px-6 py-8 shadow-elevated backdrop-blur sm:px-8">
           <h2 className="text-title-3d text-center text-3xl font-black uppercase tracking-tight sm:text-4xl">
-            À propos du créateur
+            {t("aboutTitle")}
           </h2>
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>
-              Salut ! Je suis un jeune lycéen Auvergnat. Quand je ne suis pas en cours, je m'amuse à
-              mixer mes deux plus grandes passions : la géographie et l'informatique.{" "}
-              <strong className="font-bold text-accent">FRIGIERE.GAMES</strong> est né d'une envie de
-              créer des projets liés à mes passions.
+              {t("aboutP1a")} <strong className="font-bold text-accent">FRIGIERE.GAMES</strong>{" "}
+              {t("aboutP1b")}
             </p>
-            <p>
-              Grâce à Lovable, une IA de développement de site, c'est une opportunité de créer des
-              sites plus facilement pour expérimenter plein de petits projets de chambre.
-            </p>
+            <p>{t("aboutP2")}</p>
           </div>
 
           <h3 className="mt-10 text-center text-lg font-bold uppercase tracking-[0.18em] text-accent drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] sm:text-xl">
-            Note du créateur
+            {t("noteTitle")}
           </h3>
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Le développement de ces petits jeux sert à tuer l'ennui pendant les grandes vacances
-            d'été !
+            {t("noteBody")}
           </p>
 
           <p className="mt-8 text-right text-xs font-semibold uppercase tracking-[0.2em] text-accent/80 sm:text-sm">
-            20 Août 2026
+            {t("date")}
           </p>
         </article>
       </section>
