@@ -8,7 +8,7 @@ export function ProjectConditions({
 }: {
   platforms: string;
   langs: ("fr" | "en")[];
-  players?: number;
+  players?: number | undefined;
 }) {
   const { t } = useLang();
 
