@@ -36,10 +36,35 @@ const slidesFr: Slide[] = [
   },
 ];
 
+const slidesEn: Slide[] = [
+  {
+    src: modesImg.url,
+    alt: "Monde des Géographes home page with the different game modes",
+    before: "",
+    highlight: "4",
+    after: "DIFFERENT GAME MODES ON THE SITE",
+  },
+  {
+    src: categoriesImg.url,
+    alt: "List of quiz categories on Monde des Géographes",
+    before: "SEVERAL",
+    highlight: "DOZENS",
+    after: "OF CATEGORIES TO HAVE FUN WITH !",
+  },
+  {
+    src: triImg.url,
+    alt: "Category sorting panel on Monde des Géographes",
+    before: "A",
+    highlight: "SMART SORTING SYSTEM",
+    after: "TO FIND YOUR FAVOURITE CATEGORIES !",
+  },
+];
+
 export function MondeGallery() {
   const { lang, t } = useLang();
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
+  const slides = lang === "fr" ? slidesFr : slidesEn;
 
   const go = (dir: number) => setIndex((i) => (i + dir + slides.length) % slides.length);
 

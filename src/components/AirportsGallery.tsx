@@ -52,10 +52,52 @@ const slidesFr: Slide[] = [
   },
 ];
 
+const slidesEn: Slide[] = [
+  {
+    src: img1.url,
+    alt: "Map of France with an air route between Lyon and Marseille",
+    parts: [
+      { text: "GROW YOUR" },
+      { text: "AIR NETWORK ACROSS FRANCE", hl: true },
+      { text: "!" },
+    ],
+  },
+  {
+    src: img2.url,
+    alt: "Marseille Provence airport panel with its occupancy rate",
+    parts: [
+      { text: "WATCH OUT THAT YOUR" },
+      { text: "AIRPORTS DON'T GET FULL", hl: true },
+      { text: "!" },
+    ],
+  },
+  {
+    src: img3.url,
+    alt: "Menu to build a new airport",
+    parts: [
+      { text: "BUILD" },
+      { text: "NEW AIRPORTS", hl: true },
+      { text: "!" },
+      { text: "84", hl: true },
+      { text: "AIRPORTS AVAILABLE !" },
+    ],
+  },
+  {
+    src: img4.url,
+    alt: "Full view of the Company Airports game with several air routes",
+    parts: [
+      { text: "KEEP" },
+      { text: "GROWING YOUR NETWORK", hl: true },
+      { text: "!" },
+    ],
+  },
+];
+
 export function AirportsGallery() {
   const { lang, t } = useLang();
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
+  const slides = lang === "fr" ? slidesFr : slidesEn;
 
   const go = (dir: number) => setIndex((i) => (i + dir + slides.length) % slides.length);
 

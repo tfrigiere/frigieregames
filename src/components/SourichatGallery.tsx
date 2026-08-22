@@ -55,10 +55,55 @@ const slidesFr: Slide[] = [
   },
 ];
 
+const slidesEn: Slide[] = [
+  {
+    src: img1.url,
+    alt: "Ongoing game seen by the mouse on Sourichat.map",
+    parts: [
+      { text: "RUN AWAY AS THE" },
+      { text: "MOUSE", hl: "souris" },
+      { text: "SO YOU DON'T GET CAUGHT" },
+    ],
+  },
+  {
+    src: img2.url,
+    alt: "Ongoing game seen by the cat on Sourichat.map",
+    parts: [
+      { text: "TRY TO CATCH THE MOUSE AS THE" },
+      { text: "CAT", hl: "chat" },
+      { text: "!" },
+    ],
+  },
+  {
+    src: img3.url,
+    alt: "Game settings menu on Sourichat.map",
+    parts: [
+      { text: "SET UP A GAME" },
+      { text: "EASILY", hl: "theme" },
+      { text: "THANKS TO THIS" },
+      { text: "ERGONOMIC AND EASY-TO-USE SETTINGS MENU", hl: "theme" },
+      { text: "!" },
+    ],
+  },
+  {
+    src: img4.url,
+    alt: "Defining a play area with nodes on Sourichat.map",
+    parts: [
+      { text: "DEFINE A PLAY AREA" },
+      { text: "EASILY", hl: "theme" },
+      { text: "THANKS TO" },
+      { text: "THE USE OF NODES", hl: "theme" },
+      { text: "nodes", hl: "theme", small: true },
+      { text: "!" },
+    ],
+  },
+];
+
 export function SourichatGallery() {
   const { lang, t } = useLang();
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
+  const slides = lang === "fr" ? slidesFr : slidesEn;
 
   const go = (dir: number) => setIndex((i) => (i + dir + slides.length) % slides.length);
 
