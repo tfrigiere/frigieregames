@@ -53,6 +53,12 @@ export const fr = {
   souriLi1: "Le chat qui a pour but de toucher la souris. Sur son appareil, il a une visualisation d'une zone où se trouve la souris (et pas précisément où elle est) et les dimensions de la zone.",
   souriLi2: "La souris, quant à elle, n'a que sa position et les dimensions de la zone, son but est de juste « fuir ».",
   airD1: "Un site de type jeu pur qui permet de développer son réseau aérien dans toute la France, c'est un jeu de type « tycoon » et gestion.",
+  promptTitleA: "Intéressé ? Observez un exemple de 1 de mes prompts sur",
+  promptTitleB: "réalisé en début septembre :",
+  promptOpen: "Ouvrir le prompt",
+  promptChars: "Prompt de 4 500 caractères",
+  promptDownload: "Télécharger le .txt",
+  promptLoading: "Chargement...",
 } as const;
 
 export const en: Record<keyof typeof fr, string> = {
