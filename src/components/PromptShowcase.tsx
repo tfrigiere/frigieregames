@@ -29,7 +29,7 @@ export function PromptShowcase() {
       <article className="rounded-2xl border border-border bg-card/70 px-6 py-8 shadow-elevated backdrop-blur sm:px-8">
         <h2 className="text-title-3d text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
           {t("promptTitleA")}{" "}
-          <span className="font-black text-accent">&lt;Company Airports&gt;</span>{" "}
+          <span className="font-black text-accent">Company Airports</span>{" "}
           {t("promptTitleB")}
         </h2>
 

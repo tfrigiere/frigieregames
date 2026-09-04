@@ -107,7 +107,7 @@ export const en: Record<keyof typeof fr, string> = {
   souriLi2: "The mouse only has its own position and the size of the area; its goal is simply to flee.",
   airD1: "A pure game website where you develop your airline network across France — a tycoon and management game.",
   promptTitleA: "Interested? Take a look at one of my prompts for",
-  promptTitleB: "written in early September:",
+  promptTitleB: "written in early September 2026:",
   promptOpen: "Open the prompt",
   promptChars: "4,500-character prompt",
   promptDownload: "Download the .txt",
