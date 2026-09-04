@@ -240,6 +240,8 @@ function Index() {
           </p>
         </article>
       </section>
+
+      <PromptShowcase />
     </main>
   );
 }
