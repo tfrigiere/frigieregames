@@ -53,6 +53,12 @@ export const fr = {
   souriLi1: "Le chat qui a pour but de toucher la souris. Sur son appareil, il a une visualisation d'une zone où se trouve la souris (et pas précisément où elle est) et les dimensions de la zone.",
   souriLi2: "La souris, quant à elle, n'a que sa position et les dimensions de la zone, son but est de juste « fuir ».",
   airD1: "Un site de type jeu pur qui permet de développer son réseau aérien dans toute la France, c'est un jeu de type « tycoon » et gestion.",
+  promptTitleA: "Intéressé ? Observez un exemple de 1 de mes prompts sur",
+  promptTitleB: "réalisé en début septembre :",
+  promptOpen: "Ouvrir le prompt",
+  promptChars: "Prompt de 4 500 caractères",
+  promptDownload: "Télécharger le .txt",
+  promptLoading: "Chargement...",
 } as const;
 
 export const en: Record<keyof typeof fr, string> = {
@@ -100,6 +106,12 @@ export const en: Record<keyof typeof fr, string> = {
   souriLi1: "The cat, whose goal is to tag the mouse. On their device they see an area where the mouse is (not its exact position) and the size of that area.",
   souriLi2: "The mouse only has its own position and the size of the area; its goal is simply to flee.",
   airD1: "A pure game website where you develop your airline network across France — a tycoon and management game.",
+  promptTitleA: "Interested? Take a look at one of my prompts for",
+  promptTitleB: "written in early September:",
+  promptOpen: "Open the prompt",
+  promptChars: "4,500-character prompt",
+  promptDownload: "Download the .txt",
+  promptLoading: "Loading...",
 };
 
 const dicts = { fr, en };

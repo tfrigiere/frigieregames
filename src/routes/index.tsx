@@ -10,6 +10,7 @@ import { AirportsGallery } from "@/components/AirportsGallery";
 import { PlayButton } from "@/components/PlayButton";
 import { ProjectConditions } from "@/components/ProjectConditions";
 import { CommentsSection } from "@/components/CommentsSection";
+import { PromptShowcase } from "@/components/PromptShowcase";
 import { LangSwitch } from "@/components/LangSwitch";
 import { LangProvider, useLang, type fr as FrDict } from "@/lib/i18n";
 
@@ -239,6 +240,8 @@ function Index() {
           </p>
         </article>
       </section>
+
+      <PromptShowcase />
     </main>
   );
 }
