@@ -23,8 +23,8 @@ export function PlayButton({
 }: {
   projectId: string;
   link: string;
-  label?: string;
-  variant?: "play" | "access";
+  label?: string | undefined;
+  variant?: "play" | "access" | undefined;
 }) {
   const [stats, setStats] = useState<Stats | null>(null);
   const { lang, t } = useLang();
