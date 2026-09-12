@@ -15,7 +15,17 @@ function getDeviceId(): string {
 
 type Stats = { clicks: number; players: number };
 
-export function PlayButton({ projectId, link }: { projectId: string; link: string }) {
+export function PlayButton({
+  projectId,
+  link,
+  label,
+  variant = "play",
+}: {
+  projectId: string;
+  link: string;
+  label?: string;
+  variant?: "play" | "access";
+}) {
   const [stats, setStats] = useState<Stats | null>(null);
   const { lang, t } = useLang();
 
