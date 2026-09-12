@@ -221,7 +221,12 @@ function Index() {
                         langs={p.langs}
                         players={p.players}
                       />
-                      <PlayButton projectId={p.id} link={p.link} />
+                      <PlayButton
+                        projectId={p.id}
+                        link={p.link}
+                        label={p.id === "vacances" ? t("access") : undefined}
+                        variant={p.id === "vacances" ? "access" : "play"}
+                      />
                       <CommentsSection projectId={p.id} />
                     </div>
                   </div>
