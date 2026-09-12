@@ -2,9 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import frigiereLogo from "@/assets/frigiere.png.asset.json";
 import mondeLogo from "@/assets/monde.png.asset.json";
+import vacancesLogo from "@/assets/vacances-logo.png.asset.json";
 import sourichatLogo from "@/assets/sourichat.png.asset.json";
 import airportsLogo from "@/assets/airports.png.asset.json";
 import { MondeGallery } from "@/components/MondeGallery";
+import { VacancesGallery } from "@/components/VacancesGallery";
 import { SourichatGallery } from "@/components/SourichatGallery";
 import { AirportsGallery } from "@/components/AirportsGallery";
 import { PlayButton } from "@/components/PlayButton";
@@ -66,6 +68,21 @@ const projects: Project[] = [
           {t("mondeD2a")} <strong>{t("mondeD2b")}</strong>
         </p>
         <p>{t("mondeD3")}</p>
+      </>
+    ),
+  },
+  {
+    id: "vacances",
+    name: "A QUAND LES PROCHAINES VACANCES",
+    logo: vacancesLogo.url,
+    link: "https://aquandlesprochainesvacances.lovable.app/",
+    platforms: (t) => t("platformsVacances"),
+    langs: ["fr"],
+    description: (t) => (
+      <>
+        <VacancesGallery />
+        <p>{t("vacancesD1")}</p>
+        <p>{t("vacancesD2")}</p>
       </>
     ),
   },
@@ -204,7 +221,12 @@ function Index() {
                         langs={p.langs}
                         players={p.players}
                       />
-                      <PlayButton projectId={p.id} link={p.link} />
+                      <PlayButton
+                        projectId={p.id}
+                        link={p.link}
+                        label={p.id === "vacances" ? t("access") : undefined}
+                        variant={p.id === "vacances" ? "access" : "play"}
+                      />
                       <CommentsSection projectId={p.id} />
                     </div>
                   </div>

@@ -226,6 +226,25 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
+@utility btn-access {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  width: 100%;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, oklch(0.78 0.16 65), oklch(0.65 0.18 55));
+  color: oklch(0.18 0.05 55);
+  padding: 0.9rem 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  box-shadow: 0 10px 0 -2px oklch(0.5 0.14 50), 0 18px 30px -12px oklch(0.72 0.18 55 / 70%);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
 @utility play-stats {
   display: inline-flex;
   align-items: center;
@@ -242,6 +261,10 @@
   font-size: 0.9rem;
   letter-spacing: 0.06em;
   line-height: 1;
+}
+
+@utility play-stat-access {
+  background: oklch(0.25 0.05 55 / 30%);
 }
 
 @utility play-stat-icon {
@@ -425,6 +448,39 @@
   color: oklch(0.82 0.17 35);
   -webkit-text-stroke: 0.4px oklch(0.99 0.01 60);
   text-shadow: 0 0 18px oklch(0.82 0.17 35 / 70%), 0 2px 0 oklch(0.32 0.1 30);
+}
+
+@utility vacances-shot {
+  background: oklch(0.2 0.04 240);
+}
+
+@utility banner-strip-vacances {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: linear-gradient(180deg, oklch(0.3 0.07 245), oklch(0.2 0.05 250));
+  border-top: 1px solid oklch(0.55 0.08 240 / 60%);
+  padding: 0.85rem 3rem 1.6rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  word-spacing: 0.05em;
+  line-height: 1.5;
+  color: oklch(0.97 0.01 240);
+  text-transform: uppercase;
+}
+
+@utility vacances-hl {
+  font-size: 1.3em;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: oklch(0.82 0.15 75);
+  -webkit-text-stroke: 0.4px oklch(0.99 0.01 60);
+  text-shadow: 0 0 18px oklch(0.82 0.15 75 / 70%), 0 2px 0 oklch(0.32 0.08 55);
 }
 
 @utility lang-switch {
