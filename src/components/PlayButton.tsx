@@ -57,17 +57,20 @@ export function PlayButton({
 
   const fmt = (n: number) => n.toLocaleString(lang === "fr" ? "fr-FR" : "en-US");
 
+  const btnText = label ?? t("play");
+  const isAccess = variant === "access";
+
   return (
     <a
       href={link}
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      className="btn-play"
+      className={isAccess ? "btn-access" : "btn-play"}
     >
-      <span>▶ {t("play")}</span>
+      <span>▶ {btnText}</span>
       <span className="play-stats">
-        <span className="play-stat" title={t("clicksTitle")}>
+        <span className={`play-stat${isAccess ? " play-stat-access" : ""}`} title={t("clicksTitle")}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className="play-stat-icon">
             <path
               fill="currentColor"
@@ -76,7 +79,7 @@ export function PlayButton({
           </svg>
           {stats ? fmt(stats.clicks) : "—"}
         </span>
-        <span className="play-stat" title={t("playersTitle")}>
+        <span className={`play-stat${isAccess ? " play-stat-access" : ""}`} title={t("playersTitle")}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className="play-stat-icon">
             <path
               fill="currentColor"
