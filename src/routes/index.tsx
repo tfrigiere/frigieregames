@@ -72,6 +72,21 @@ const projects: Project[] = [
     ),
   },
   {
+    id: "vacances",
+    name: "A QUAND LES PROCHAINES VACANCES",
+    logo: vacancesLogo.url,
+    link: "https://aquandlesprochainesvacances.lovable.app/",
+    platforms: (t) => t("platformsVacances"),
+    langs: ["fr"],
+    description: (t) => (
+      <>
+        <VacancesGallery />
+        <p>{t("vacancesD1")}</p>
+        <p>{t("vacancesD2")}</p>
+      </>
+    ),
+  },
+  {
     id: "sourichat",
     name: "Sourichat.map",
     logo: sourichatLogo.url,
