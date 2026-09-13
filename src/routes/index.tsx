@@ -5,6 +5,7 @@ import mondeLogo from "@/assets/monde.png.asset.json";
 import vacancesLogo from "@/assets/vacances-logo.png.asset.json";
 import sourichatLogo from "@/assets/sourichat.png.asset.json";
 import airportsLogo from "@/assets/airports.png.asset.json";
+import frigePp from "@/assets/frige-pp.png.asset.json";
 import { MondeGallery } from "@/components/MondeGallery";
 import { VacancesGallery } from "@/components/VacancesGallery";
 import { SourichatGallery } from "@/components/SourichatGallery";
@@ -242,6 +243,18 @@ function Index() {
           <h2 className="text-title-3d text-center text-3xl font-black uppercase tracking-tight sm:text-4xl">
             {t("aboutTitle")}
           </h2>
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-5 sm:flex-row">
+            <img
+              src={frigePp.url}
+              alt="Frige"
+              className="h-28 w-28 rounded-full border-4 border-accent object-cover shadow-elevated sm:h-36 sm:w-36"
+            />
+            <span className="text-4xl font-black tracking-tight text-foreground sm:text-5xl">
+              Frige
+            </span>
+          </div>
+
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>
               {t("aboutP1a")} <strong className="font-bold text-accent">FRIGIERE.GAMES</strong>{" "}
