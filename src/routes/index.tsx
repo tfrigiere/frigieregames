@@ -74,7 +74,7 @@ const projects: Project[] = [
   },
   {
     id: "vacances",
-    name: "A QUAND LES PROCHAINES VACANCES",
+    name: "A Quand les Prochaines Vacances ?",
     logo: vacancesLogo.url,
     link: "https://aquandlesprochainesvacances.lovable.app/",
     platforms: (t) => t("platformsVacances"),
