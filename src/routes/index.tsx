@@ -277,6 +277,10 @@ function Index() {
       </section>
 
       <PromptShowcase />
+
+      <p className="pb-8 text-center text-xs font-medium tracking-wide text-muted-foreground/70">
+        Made by Thomas F.
+      </p>
     </main>
   );
 }
