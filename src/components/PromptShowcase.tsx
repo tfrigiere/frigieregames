@@ -45,6 +45,10 @@ export function PromptShowcase() {
           </p>
           <p className="mt-1 text-xs italic text-muted-foreground sm:text-sm">{t("promptChars")}</p>
         </div>
+
+        <p className="mt-6 text-center text-xs font-medium tracking-wide text-muted-foreground/70">
+          Made by Thomas F.
+        </p>
       </article>
 
       {open && (
