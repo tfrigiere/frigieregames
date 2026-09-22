@@ -196,6 +196,18 @@
   animation: beta-blink 1s steps(1, end) infinite;
 }
 
+@utility badge-alpha {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.35rem;
+  background: oklch(0.82 0.16 145);
+  color: oklch(0.15 0.02 150);
+  padding: 0.1rem 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
 @keyframes beta-blink {
   0%,
   50% {

@@ -46,6 +46,7 @@ type Project = {
   name: string;
   logo: string;
   beta?: boolean;
+  alpha?: boolean;
   link: string;
   platforms: (t: T) => string;
   langs: ("fr" | "en")[];
@@ -91,7 +92,7 @@ const projects: Project[] = [
     id: "sourichat",
     name: "Sourichat.map",
     logo: sourichatLogo.url,
-    beta: true,
+    alpha: true,
     link: "http://sourichatmap.lovable.app/",
     platforms: (t) => t("platformsSouri"),
     langs: ["fr", "en"],
@@ -131,7 +132,7 @@ const projects: Project[] = [
     id: "airports",
     name: "Company Airports",
     logo: airportsLogo.url,
-    beta: true,
+    alpha: true,
     link: "https://companyairports.lovable.app/",
     platforms: (t) => t("platformsAir"),
     langs: ["fr"],
@@ -201,7 +202,11 @@ function Index() {
                     <span className="text-lg font-bold text-card-foreground sm:text-xl">
                       {p.name}
                     </span>
-                    {p.beta && <span className="badge-beta">BETA</span>}
+                    {p.beta ? (
+                      <span className="badge-beta">BETA</span>
+                    ) : p.alpha ? (
+                      <span className="badge-alpha">ALPHA</span>
+                    ) : null}
                   </span>
                   <span
                     className={`text-accent transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
