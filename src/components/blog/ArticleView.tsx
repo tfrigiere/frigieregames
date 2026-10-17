@@ -1,0 +1,18 @@
+import type { Article, TextNode, Tag } from '@/lib/blog/schema';
+import { projectNames } from '@/lib/blog/schema';
+import hammer from '@/assets/marteau-admin.jpeg.asset.json';
+import shield from '@/assets/moderateur.jpeg.asset.json';
+import { useLang } from '@/lib/i18n';
+import { Fragment, type ReactNode, type CSSProperties } from 'react';
+export type DisplayArticle=Article & {banner_url?:string;image_urls?:string[];collaborators:(Article['collaborators'][number]&{avatar_url?:string})[]};
+export const defaultTag:Tag={project_id:'',color_start:'#1675a9',color_end:'#38a8d8',gradient:false};
+export function ProjectTag({id,tags}:{id:string;tags:Tag[]}){const t=tags.find(t=>t.project_id===id)||defaultTag;return <span className="article-tag" style={{'--tag-start':t.color_start,'--tag-end':t.gradient?t.color_end:t.color_start} as CSSProperties}>{projectNames[id]}</span>;}
+export function TextContent({node}:{node:TextNode}):ReactNode{
+ const children=node.content?.map((n,i)=><TextContent key={i} node={n}/>);
+ if(node.type==='text'){let text:ReactNode=node.text;for(const m of node.marks||[]){if(m.type==='bold')text=<strong>{text}</strong>;if(m.type==='italic')text=<em>{text}</em>;if(m.type==='strike')text=<s>{text}</s>;if(m.type==='underline')text=<u>{text}</u>;if(m.type==='textStyle')text=<span style={{color:m.attrs?.color as string,fontSize:m.attrs?.fontSize as string}}>{text}</span>;if(m.type==='highlight')text=<mark style={{backgroundColor:m.attrs?.color as string}}>{text}</mark>;}return text;}
+ const style={textAlign:node.attrs?.textAlign as CSSProperties['textAlign']};
+ if(node.type==='paragraph')return <p style={style}>{children||<br/>}</p>;
+ if(node.type==='heading')return <h3 style={style}>{children}</h3>;
+ if(node.type==='bulletList')return <ul>{children}</ul>;if(node.type==='orderedList')return <ol>{children}</ol>;if(node.type==='listItem')return <li>{children}</li>;if(node.type==='blockquote')return <blockquote>{children}</blockquote>;if(node.type==='hardBreak')return <br/>;if(node.type==='horizontalRule')return <hr/>;return <Fragment>{children}</Fragment>;
+}
+export function ArticleView({article:a,tags}:{article:DisplayArticle;tags:Tag[]}){const {lang}=useLang();return <><h2 className="article-title">{a.title}</h2>{a.banner_url&&<img src={a.banner_url} alt={a.title} className="article-banner"/>}<div className="article-body"><time dateTime={a.publish_at} className="text-muted-foreground text-sm">{new Date(a.publish_at).toLocaleString(lang==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})}</time><div className="article-byline"><div className="flex flex-wrap gap-4">{a.collaborators.map((c,i)=><div key={c.id||i} className="flex items-center gap-2">{c.avatar_url&&<img src={c.avatar_url} alt={c.name} className="h-10 w-10 rounded-full object-cover"/>}<span className="font-semibold">{c.name}</span><img src={c.label==='gerant'?hammer.url:shield.url} alt={c.label==='gerant'?(lang==='fr'?'Gérant':'Manager'):(lang==='fr'?'Modérateur':'Moderator')} className="role-icon"/></div>)}</div><div className="flex flex-wrap gap-2">{a.projects.map(id=><ProjectTag key={id} id={id} tags={tags}/>)}</div></div>{!!a.image_urls?.length&&<div className="article-images">{a.image_urls.map((url,i)=><a key={i} href={url} target="_blank" rel="noreferrer"><img src={url} alt={`${a.title} — ${i+1}`}/></a>)}</div>}<div className="article-text"><TextContent node={a.content}/></div></div></>;}

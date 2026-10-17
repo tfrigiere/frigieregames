@@ -14,6 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_gate_attempts: {
+        Row: {
+          attempts: number
+          key: string
+          reset_at: string
+        }
+        Insert: {
+          attempts?: number
+          key: string
+          reset_at?: string
+        }
+        Update: {
+          attempts?: number
+          key?: string
+          reset_at?: string
+        }
+        Relationships: []
+      }
+      blog_articles: {
+        Row: {
+          banner: string
+          collaborators: Json
+          content: Json
+          created_at: string
+          id: string
+          images: Json
+          projects: string[]
+          publish_at: string
+          title: string
+        }
+        Insert: {
+          banner?: string
+          collaborators?: Json
+          content?: Json
+          created_at?: string
+          id?: string
+          images?: Json
+          projects?: string[]
+          publish_at?: string
+          title: string
+        }
+        Update: {
+          banner?: string
+          collaborators?: Json
+          content?: Json
+          created_at?: string
+          id?: string
+          images?: Json
+          projects?: string[]
+          publish_at?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      blog_collaborators: {
+        Row: {
+          avatar: string
+          id: string
+          label: string
+          name: string
+        }
+        Insert: {
+          avatar?: string
+          id?: string
+          label: string
+          name: string
+        }
+        Update: {
+          avatar?: string
+          id?: string
+          label?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      blog_project_tags: {
+        Row: {
+          color_end: string
+          color_start: string
+          gradient: boolean
+          project_id: string
+        }
+        Insert: {
+          color_end: string
+          color_start: string
+          gradient?: boolean
+          project_id: string
+        }
+        Update: {
+          color_end?: string
+          color_start?: string
+          gradient?: boolean
+          project_id?: string
+        }
+        Relationships: []
+      }
       project_comments: {
         Row: {
           author_name: string
@@ -82,6 +178,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      consume_admin_attempt: { Args: { _key: string }; Returns: boolean }
       record_play: {
         Args: { _device_id: string; _project_id: string }
         Returns: {

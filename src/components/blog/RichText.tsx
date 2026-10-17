@@ -1,0 +1,14 @@
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import { TextStyle, Color, FontSize } from '@tiptap/extension-text-style';
+import Highlight from '@tiptap/extension-highlight';
+import TextAlign from '@tiptap/extension-text-align';
+import { Bold, Italic, Strikethrough, Underline, AlignLeft, AlignCenter, AlignRight, Undo2, Redo2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import type { TextNode } from '@/lib/blog/schema';
+export function RichText({value,onChange}:{value:TextNode;onChange:(v:TextNode)=>void}){
+ const editor=useEditor({immediatelyRender:false,extensions:[StarterKit.configure({link:false,code:false,codeBlock:false}),TextStyle,Color,FontSize,Highlight.configure({multicolor:true}),TextAlign.configure({types:['heading','paragraph']})],content:value,onUpdate:({editor})=>onChange(editor.getJSON() as TextNode)});
+ if(!editor)return <div className="h-60 bg-secondary animate-pulse"/>;
+ const tools=[{Icon:Bold,title:'Gras / Bold',run:()=>editor.chain().focus().toggleBold().run(),active:'bold'},{Icon:Italic,title:'Italique / Italic',run:()=>editor.chain().focus().toggleItalic().run(),active:'italic'},{Icon:Strikethrough,title:'Barré / Strike',run:()=>editor.chain().focus().toggleStrike().run(),active:'strike'},{Icon:Underline,title:'Souligné / Underline',run:()=>editor.chain().focus().toggleUnderline().run(),active:'underline'},{Icon:AlignLeft,title:'Aligner à gauche / Align left',run:()=>editor.chain().focus().setTextAlign('left').run()},{Icon:AlignCenter,title:'Centrer / Center',run:()=>editor.chain().focus().setTextAlign('center').run()},{Icon:AlignRight,title:'Aligner à droite / Align right',run:()=>editor.chain().focus().setTextAlign('right').run()},{Icon:Undo2,title:'Annuler / Undo',run:()=>editor.chain().focus().undo().run()},{Icon:Redo2,title:'Rétablir / Redo',run:()=>editor.chain().focus().redo().run()}];
+ return <div className="rich-editor"><div className="rich-toolbar">{tools.map(({Icon,title,run,active})=><Button key={title} type="button" variant={active&&editor.isActive(active)?'secondary':'ghost'} size="icon" title={title} onClick={run}><Icon/></Button>)}<select aria-label="Taille de police / Font size" defaultValue="16" onChange={e=>editor.chain().focus().setFontSize(e.target.value+'px').run()}>{[12,14,16,18,20,24,28,32].map(n=><option key={n} value={n}>{n}px</option>)}</select><input type="color" aria-label="Couleur du texte / Text color" defaultValue="#ffffff" onChange={e=>editor.chain().focus().setColor(e.target.value).run()}/><input type="color" aria-label="Surlignage / Highlight" defaultValue="#facc15" onChange={e=>editor.chain().focus().toggleHighlight({color:e.target.value}).run()}/></div><EditorContent editor={editor}/></div>;
+}
