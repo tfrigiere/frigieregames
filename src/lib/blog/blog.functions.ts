@@ -20,7 +20,12 @@ export const listBlog=createServerFn({method:'GET'}).handler(async()=>{
  client=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false},global:{fetch:(input,init)=>{const h=new Headers(init?.headers);if(key.startsWith('sb_'))h.delete('Authorization');h.set('apikey',key);return fetch(input,{...init,headers:h});}}});
  }
  const [articles,collaborators,tags]=await Promise.all([client.from('blog_articles').select('*').order('publish_at',{ascending:false}),client.from('blog_collaborators').select('*').order('name'),client.from('blog_project_tags').select('*')]);
- if(articles.error||collaborators.error||tags.error)throw new Error('Blog indisponible');return {articles:articles.data||[],collaborators:collaborators.data||[],tags:tags.data||[],admin};
+ if(articles.error||collaborators.error||tags.error)throw new Error('Blog indisponible');const {supabaseAdmin:mediaClient}=await import('@/integrations/supabase/client.server');
+ const resolve=async (v:string)=>{if(!v.startsWith('blog-media/'))return v;const {data}=await mediaClient.storage.from('blog-media').createSignedUrl(v.slice(11),3600);return data?.signedUrl||'';};
+ const publicUrl=(v:string)=>v.replace(process.env['SUPABASE_URL']||'__none__',import.meta.env.VITE_SUPABASE_URL);
+ const resolved=await Promise.all((articles.data||[]).map(async a=>({...a,banner_url:publicUrl(await resolve(a.banner)),image_urls:await Promise.all((a.images as string[]).map(async v=>publicUrl(await resolve(v)))),collaborators:await Promise.all((a.collaborators as {avatar:string}[]).map(async c=>({...c,avatar_url:publicUrl(await resolve(c.avatar))})))})));
+ const people=await Promise.all((collaborators.data||[]).map(async c=>({...c,avatar_url:publicUrl(await resolve(c.avatar))})));
+ return {articles:resolved,collaborators:people,tags:tags.data||[],admin};
 });
 export const saveArticle=createServerFn({method:'POST'}).inputValidator(articleSchema).handler(async({data})=>{const {requireAdmin}=await import('./gate.server');await requireAdmin();const {supabaseAdmin}=await import('@/integrations/supabase/client.server');const {data:row,error}=await supabaseAdmin.from('blog_articles').upsert(data).select('id').single();if(error)throw new Error('Enregistrement impossible');return row;});
 export const deleteArticle=createServerFn({method:'POST'}).inputValidator(z.object({id:z.string().uuid()})).handler(async({data})=>{const {requireAdmin}=await import('./gate.server');await requireAdmin();const {supabaseAdmin}=await import('@/integrations/supabase/client.server');const {error}=await supabaseAdmin.from('blog_articles').delete().eq('id',data.id);if(error)throw new Error('Suppression impossible');return {ok:true};});
@@ -32,5 +37,5 @@ export const uploadBlogImage=createServerFn({method:'POST'}).inputValidator((dat
  if(!(file instanceof File)||!['image/jpeg','image/png','image/webp','image/gif','image/avif','image/bmp'].includes(file.type)||file.size>10*1024*1024)throw new Error('Image non prise en charge (10 Mo maximum)');
  const bytes=new Uint8Array(await file.arrayBuffer());const valid=(bytes[0]===255&&bytes[1]===216)||(bytes[0]===137&&bytes[1]===80)||(bytes[0]===71&&bytes[1]===73)||(bytes[0]===82&&bytes[1]===73)||(bytes[0]===66&&bytes[1]===77)||(bytes[4]===102&&bytes[5]===116);if(!valid)throw new Error('Format image invalide');
  const {supabaseAdmin}=await import('@/integrations/supabase/client.server');const path=crypto.randomUUID()+'.'+file.type.split('/')[1];const {error}=await supabaseAdmin.storage.from('blog-media').upload(path,bytes,{contentType:file.type});if(error)throw new Error('Import impossible');
- const base=import.meta.env.VITE_SUPABASE_URL;return {url:base+'/storage/v1/object/public/blog-media/'+path};
+ const {data:signed}=await supabaseAdmin.storage.from('blog-media').createSignedUrl(path,3600);return {url:'blog-media/'+path,preview:(signed?.signedUrl||'').replace(process.env['SUPABASE_URL']||'__none__',import.meta.env.VITE_SUPABASE_URL)};
 });
