@@ -32,8 +32,8 @@ export const Route = createFileRoute("/")({
         content:
           "Monde des Géographes, Sourichat.map et Company Airports : trois projets à découvrir sur Frigiere.games.",
       },
-      { property: "og:image", content: `https://frigiere.games${frigiereLogo.url}` },
-      { name: "twitter:image", content: `https://frigiere.games${frigiereLogo.url}` },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: IndexPage,
@@ -145,11 +145,7 @@ const projects: Project[] = [
 ];
 
 function IndexPage() {
-  return (
-    <LangProvider>
-      <Index />
-    </LangProvider>
-  );
+  return <Index />;
 }
 
 function Index() {
@@ -157,27 +153,12 @@ function Index() {
   const { t } = useLang();
 
   return (
-    <main className="min-h-screen bg-background bg-hero-glow">
-      <div className="mx-auto flex max-w-6xl justify-end px-6 pt-5">
-        <LangSwitch />
-      </div>
-
-      <section className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 pb-20 pt-8 md:flex-row md:justify-center md:gap-14 md:pb-28">
-        <img
-          src={frigiereLogo.url}
-          alt="Logo Frigiere.games : cube de cristal glacé en forme de F"
-          className="w-52 drop-shadow-[0_20px_45px_rgba(80,190,255,0.45)] md:w-72"
-        />
-        <h1 className="text-title-3d text-center text-5xl font-black uppercase tracking-tight sm:text-6xl md:text-left md:text-7xl">
-          Frigiere
-          <span className="text-accent">.games</span>
-        </h1>
-      </section>
+    <>
 
       <section className="mx-auto max-w-3xl px-6 pb-24">
-        <h2 className="mb-8 text-center text-2xl font-bold text-foreground/90">
+        <h1 className="sr-only">
           {t("projectsTitle")}
-        </h2>
+        </h1>
         <div className="space-y-5">
           {projects.map((p) => {
             const isOpen = open === p.id;
@@ -281,6 +262,6 @@ function Index() {
       </section>
 
       <PromptShowcase />
-    </main>
+    </>
   );
 }
