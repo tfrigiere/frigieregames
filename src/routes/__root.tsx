@@ -11,6 +11,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { LangProvider } from '@/lib/i18n';
+import { AdminAccess } from '@/components/AdminAccess';
+import { ProjectTabs } from '@/components/ProjectTabs';
+import { LangSwitch } from '@/components/LangSwitch';
+import frigiereLogo from '@/assets/frigiere.png.asset.json';
 
 function NotFoundComponent() {
   return (
@@ -125,8 +130,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <LangProvider><AdminAccess><main className="min-h-screen bg-background bg-hero-glow">
+        <div className="mx-auto flex max-w-6xl justify-end px-6 pt-5"><LangSwitch /></div>
+        <header className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 pb-12 pt-8 md:flex-row md:justify-center md:gap-14">
+          <Link to="/" aria-label="Frigiere.games"><img src={frigiereLogo.url} alt="Logo Frigiere.games" className="w-52 md:w-72" /></Link>
+          <div className="text-title-3d text-center text-5xl font-black uppercase sm:text-6xl md:text-left md:text-7xl">Frigiere<span className="text-accent">.games</span></div>
+        </header>
+        <ProjectTabs /><Outlet />
+      </main></AdminAccess></LangProvider>
     </QueryClientProvider>
   );
 }

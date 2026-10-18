@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/lib/i18n";
+import { useAdmin } from '@/components/AdminAccess';
+import { useServerFn } from '@tanstack/react-start';
+import { deleteComment } from '@/lib/blog/blog.functions';
+import { Button } from '@/components/ui/button';
+import { Trash2 } from 'lucide-react';
 
 type Comment = {
   id: string;
@@ -16,6 +21,9 @@ export function CommentsSection({ projectId }: { projectId: string }) {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { lang, t } = useLang();
+  const { admin } = useAdmin();
+  const remove = useServerFn(deleteComment);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -130,6 +138,13 @@ export function CommentsSection({ projectId }: { projectId: string }) {
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <span className="text-sm font-bold text-accent">{c.author_name}</span>
               <span className="text-[11px] text-muted-foreground">{fmtDate(c.created_at)}</span>
+              {admin && <Button variant="ghost" size="icon" disabled={deleting === c.id} title={lang === 'fr' ? 'Supprimer le commentaire' : 'Delete comment'} onClick={async () => {
+                if (!window.confirm(lang === 'fr' ? 'Supprimer ce commentaire ?' : 'Delete this comment?')) return;
+                setDeleting(c.id);
+                try { await remove({data:{id:c.id}}); setComments(old => old.filter(row => row.id !== c.id)); }
+                catch { setError(lang === 'fr' ? 'Suppression impossible.' : 'Unable to delete.'); }
+                finally { setDeleting(null); }
+              }}><Trash2 className="text-destructive" /></Button>}
             </div>
             <p className="mt-1 whitespace-pre-wrap break-words text-sm text-muted-foreground">
               {c.message}
