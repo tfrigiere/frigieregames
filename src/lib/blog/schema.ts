@@ -3,7 +3,7 @@ export const projectNames: Record<string,string> = {monde:'Monde des Géographes
 export const projectId = z.enum(['monde','vacances','sourichat','airports']);
 export const colorSchema = z.string().regex(/^#[0-9a-fA-F]{6}$/);
 const media = z.string().max(2048).refine(v => v === '' || v.startsWith('blog-media/') || /^https:\/\//.test(v) || v.startsWith('/__l5e/assets-v1/'));
-export type TextNode = {type:string;text?:string;attrs?:Record<string,unknown>;marks?:{type:string;attrs?:Record<string,unknown>}[];content?:TextNode[]};
+export type TextNode = {type:string;text?:string|undefined;attrs?:Record<string,string|number|undefined>|undefined;marks?:{type:string;attrs?:Record<string,string|undefined>|undefined}[]|undefined;content?:TextNode[]|undefined};
 export function textLength(n: TextNode):number { return (n.text?.length || 0) + (n.content || []).reduce((a,c)=>a+textLength(c),0); }
 const node: z.ZodType<TextNode> = z.lazy(()=>z.object({type:z.enum(['doc','paragraph','text','heading','bulletList','orderedList','listItem','hardBreak','blockquote','horizontalRule']),text:z.string().optional(),attrs:z.object({textAlign:z.enum(['left','center','right','justify']).optional(),level:z.number().min(1).max(6).optional()}).optional(),marks:z.array(z.object({type:z.enum(['bold','italic','strike','underline','textStyle','highlight']),attrs:z.object({color:colorSchema.optional(),backgroundColor:colorSchema.optional(),fontSize:z.string().regex(/^(12|14|16|18|20|24|28|32)px$/).optional()}).optional()})).optional(),content:z.array(node).optional()}));
 export const contentSchema = node.refine(n=>textLength(n)<=10000,'10 000 caractères maximum');

@@ -4,13 +4,13 @@ import hammer from '@/assets/marteau-admin.jpeg.asset.json';
 import shield from '@/assets/moderateur.jpeg.asset.json';
 import { useLang } from '@/lib/i18n';
 import { Fragment, type ReactNode, type CSSProperties } from 'react';
-export type DisplayArticle=Article & {banner_url?:string;image_urls?:string[];collaborators:(Article['collaborators'][number]&{avatar_url?:string})[]};
+export type DisplayArticle=Omit<Article,'collaborators'> & {banner_url?:string;image_urls?:string[];collaborators:(Article['collaborators'][number]&{avatar_url?:string})[]};
 export const defaultTag:Tag={project_id:'',color_start:'#1675a9',color_end:'#38a8d8',gradient:false};
 export function ProjectTag({id,tags}:{id:string;tags:Tag[]}){const t=tags.find(t=>t.project_id===id)||defaultTag;return <span className="article-tag" style={{'--tag-start':t.color_start,'--tag-end':t.gradient?t.color_end:t.color_start} as CSSProperties}>{projectNames[id]}</span>;}
 export function TextContent({node}:{node:TextNode}):ReactNode{
  const children=node.content?.map((n,i)=><TextContent key={i} node={n}/>);
- if(node.type==='text'){let text:ReactNode=node.text;for(const m of node.marks||[]){if(m.type==='bold')text=<strong>{text}</strong>;if(m.type==='italic')text=<em>{text}</em>;if(m.type==='strike')text=<s>{text}</s>;if(m.type==='underline')text=<u>{text}</u>;if(m.type==='textStyle')text=<span style={{color:m.attrs?.color as string,fontSize:m.attrs?.fontSize as string}}>{text}</span>;if(m.type==='highlight')text=<mark style={{backgroundColor:m.attrs?.color as string}}>{text}</mark>;}return text;}
- const style={textAlign:node.attrs?.textAlign as CSSProperties['textAlign']};
+ if(node.type==='text'){let text:ReactNode=node.text;for(const m of node.marks||[]){if(m.type==='bold')text=<strong>{text}</strong>;if(m.type==='italic')text=<em>{text}</em>;if(m.type==='strike')text=<s>{text}</s>;if(m.type==='underline')text=<u>{text}</u>;if(m.type==='textStyle')text=<span style={{color:m.attrs?.['color'] as string,fontSize:m.attrs?.['fontSize'] as string}}>{text}</span>;if(m.type==='highlight')text=<mark style={{backgroundColor:m.attrs?.['color'] as string}}>{text}</mark>;}return text;}
+ const style={textAlign:node.attrs?.['textAlign'] as CSSProperties['textAlign']};
  if(node.type==='paragraph')return <p style={style}>{children||<br/>}</p>;
  if(node.type==='heading')return <h3 style={style}>{children}</h3>;
  if(node.type==='bulletList')return <ul>{children}</ul>;if(node.type==='orderedList')return <ol>{children}</ol>;if(node.type==='listItem')return <li>{children}</li>;if(node.type==='blockquote')return <blockquote>{children}</blockquote>;if(node.type==='hardBreak')return <br/>;if(node.type==='horizontalRule')return <hr/>;return <Fragment>{children}</Fragment>;
