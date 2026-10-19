@@ -665,3 +665,4 @@
 .color-picker input:disabled {opacity:.35;cursor:not-allowed;}
 @media(max-width:600px){.upload-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.article-title{font-size:20px;padding:1rem;}.article-body{padding:1rem;}.blog-admin-tools{position:static;}.project-tabs{margin-inline:1.5rem;}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
+@media(max-width:600px){header .text-title-3d{font-size:32px;}header{max-width:100%;}}
