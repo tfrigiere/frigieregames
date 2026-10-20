@@ -13,6 +13,7 @@ import { AirportsGallery } from "@/components/AirportsGallery";
 import { PlayButton } from "@/components/PlayButton";
 import { ProjectConditions } from "@/components/ProjectConditions";
 import { CommentsSection } from "@/components/CommentsSection";
+import { CustomProjects } from "@/components/CustomProjects";
 import { PromptShowcase } from "@/components/PromptShowcase";
 import { LangSwitch } from "@/components/LangSwitch";
 import { LangProvider, useLang, type fr as FrDict } from "@/lib/i18n";
@@ -220,6 +221,7 @@ function Index() {
               </article>
             );
           })}
+          <CustomProjects />
         </div>
       </section>
 
