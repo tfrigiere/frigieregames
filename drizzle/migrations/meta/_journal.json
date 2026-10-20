@@ -15,6 +15,13 @@
       "when": 1792480282406,
       "tag": "0001_blog_publication_clock",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792483338503,
+      "tag": "0002_custom_projects",
+      "breakpoints": true
     }
   ]
 }
