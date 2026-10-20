@@ -8,6 +8,13 @@
       "when": 1792234817033,
       "tag": "0000_blog_editor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792480282406,
+      "tag": "0001_blog_publication_clock",
+      "breakpoints": true
     }
   ]
 }

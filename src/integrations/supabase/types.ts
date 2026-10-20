@@ -178,6 +178,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      blog_publication_time: { Args: never; Returns: string }
       consume_admin_attempt: { Args: { _key: string }; Returns: boolean }
       record_play: {
         Args: { _device_id: string; _project_id: string }
