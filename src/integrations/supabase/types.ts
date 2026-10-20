@@ -110,6 +110,45 @@ export type Database = {
         }
         Relationships: []
       }
+      custom_projects: {
+        Row: {
+          button: string
+          created_at: string
+          description: Json
+          exe: boolean
+          id: string
+          images: Json
+          langs: string[]
+          link: string
+          platforms: string[]
+          title: string
+        }
+        Insert: {
+          button?: string
+          created_at?: string
+          description?: Json
+          exe?: boolean
+          id?: string
+          images?: Json
+          langs?: string[]
+          link?: string
+          platforms?: string[]
+          title: string
+        }
+        Update: {
+          button?: string
+          created_at?: string
+          description?: Json
+          exe?: boolean
+          id?: string
+          images?: Json
+          langs?: string[]
+          link?: string
+          platforms?: string[]
+          title?: string
+        }
+        Relationships: []
+      }
       project_comments: {
         Row: {
           author_name: string
