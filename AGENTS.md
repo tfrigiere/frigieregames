@@ -13,5 +13,6 @@
 - Blog content stores validated Tiptap JSON rendered as React elements, not HTML, to preserve rich formatting without unsafe markup.
 - Editorial collaborators are display signatures, never authentication roles; their labels must not grant permissions.
 - Scheduled visibility is enforced by database RLS on publish_at; privileged admin lists read all articles only after the shared session is verified.
+- Immediate publication uses the database clock rather than the browser clock so device time skew cannot hide a newly published article.
 - Blog images use private Cloud storage and short-lived signed URLs generated only for visible articles; public buckets are blocked by workspace policy.
 - The root route owns the language provider, shared branded header, navigation and admin session state so both content routes remain consistent.
