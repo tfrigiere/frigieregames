@@ -674,3 +674,18 @@
 .launcher-card{display:grid;gap:.5rem;margin-top:2rem;padding:2.5rem 1.5rem;border:1px solid var(--color-border);border-radius:1.25rem;background:color-mix(in oklab,var(--color-card) 75%,transparent);box-shadow:0 20px 60px -20px color-mix(in oklab,var(--color-accent) 40%,transparent)}
 .btn-windows{display:inline-flex;align-items:center;justify-content:center;gap:.75rem;margin:1.5rem auto 0;padding:1rem 2rem;border-radius:.8rem;font-weight:900;letter-spacing:.08em;color:var(--color-accent-foreground);background:linear-gradient(135deg,var(--color-accent),color-mix(in oklab,var(--color-accent) 60%,var(--color-primary)));transition:transform .2s}
 .btn-windows:hover{transform:translateY(-2px) scale(1.03)}
+
+/* Launcher */
+.launcher-overlay{position:fixed;inset:0;z-index:80;display:grid;place-items:center;background:color-mix(in oklab,var(--background) 70%,transparent);backdrop-filter:blur(10px);padding:1rem}
+.launcher-panel{width:min(34rem,100%);display:flex;flex-direction:column;gap:1.2rem;padding:2rem;border-radius:1.25rem;border:1px solid color-mix(in oklab,var(--primary) 50%,transparent);background:linear-gradient(160deg,color-mix(in oklab,var(--primary) 25%,var(--card)),var(--card));box-shadow:0 0 50px color-mix(in oklab,var(--primary) 35%,transparent)}
+.ice-title{font-family:Orbitron,sans-serif;font-weight:900;text-align:center;font-size:1.35rem;color:var(--foreground);text-shadow:0 0 12px var(--primary),0 0 2px var(--foreground)}
+.launcher-check{display:flex;gap:.7rem;align-items:center;padding:.7rem 1rem;border-radius:.7rem;background:color-mix(in oklab,var(--foreground) 6%,transparent);font-weight:600;cursor:pointer}
+.launcher-btn-ghost{padding:.8rem 1.4rem;border-radius:.8rem;border:1px solid var(--border);font-weight:700}
+.launcher-bar{height:14px;border-radius:99px;overflow:hidden;background:color-mix(in oklab,var(--foreground) 12%,transparent)}
+.launcher-bar>div{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .2s}
+.powered-intro{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;background:var(--background);animation:powered-fade 3.8s ease forwards;cursor:pointer}
+.powered-line{font-family:Orbitron,sans-serif;font-weight:900;letter-spacing:.5em;font-size:clamp(1.2rem,4vw,2.4rem);color:var(--foreground);animation:powered-rise 1s ease both}
+.powered-by{font-size:clamp(.9rem,2.5vw,1.4rem);color:var(--primary);animation-delay:.5s}
+.powered-logo{width:min(22rem,70vw);margin-top:1rem;animation:powered-rise 1.2s ease 1s both;filter:drop-shadow(0 0 25px var(--primary))}
+@keyframes powered-rise{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes powered-fade{0%,85%{opacity:1}100%{opacity:0}}

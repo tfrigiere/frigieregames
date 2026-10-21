@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LangProvider } from '@/lib/i18n';
 import { AdminAccess } from '@/components/AdminAccess';
 import { ProjectTabs } from '@/components/ProjectTabs';
+import { LauncherSetup } from '@/components/LauncherSetup';
 import { LangSwitch } from '@/components/LangSwitch';
 import frigiereLogo from '@/assets/frigiere.png.asset.json';
 
@@ -137,7 +138,7 @@ function RootComponent() {
           <Link to="/" aria-label="Frigiere.games"><img src={frigiereLogo.url} alt="Logo Frigiere.games" className="w-52 md:w-72" /></Link>
           <div className="text-title-3d text-center text-5xl font-black uppercase sm:text-6xl md:text-left md:text-7xl">Frigiere<span className="text-accent">.games</span></div>
         </header>
-        <ProjectTabs /><Outlet />
+        <ProjectTabs /><Outlet /><LauncherSetup />
       </main></AdminAccess></LangProvider>
     </QueryClientProvider>
   );
