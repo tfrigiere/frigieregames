@@ -1,0 +1,22 @@
+name: Build frigieregameslauncher.exe
+on:
+  workflow_dispatch:
+  push:
+    paths: ['launcher/**']
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults: { run: { working-directory: launcher } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm install
+      - run: npm run dist
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: launcher-v${{ github.run_number }}
+          name: FRIGIEREGAMES LAUNCHER ${{ github.run_number }}
+          files: launcher/dist/frigieregameslauncher.exe
