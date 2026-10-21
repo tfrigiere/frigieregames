@@ -211,6 +211,7 @@ function Index() {
                       <PlayButton
                         projectId={p.id}
                         link={p.link}
+                        name={p.name}
                         label={p.id === "vacances" ? t("access") : undefined}
                         variant={p.id === "vacances" ? "access" : "play"}
                       />
