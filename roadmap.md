@@ -7,6 +7,7 @@
 - [ ] Bouton admin vert « + Ajouter un projet » avec fenêtre en 4 catégories (titre, images + description riche, plateformes/langues/bouton PLAY-ACCÉDER, disponible en .exe).
 
 # Launcher
+- [x] Icônes officielles des projets et cinématique au lancement Bureau : tests automatisés et affichage vérifiés ; installation Windows à tester avec le prochain .exe GitHub.
 - [x] Onglet DOWNLOAD LAUNCHER, version modifiable (1.0), DOWNLOAD FOR WINDOWS, popup. Bloqué: fichier .exe à compiler (lien à coller en admin).
 - [x] Logiciel FRIGIEREGAMES LAUNCHER (icône PC = logo F) : installation, choix des jeux, progression, raccourcis bureau.
 - [x] Mode logiciel : pas d'admin ni d'onglet download, boutons TÉLÉCHARGER JEU (poids, progression) → JOUER.
