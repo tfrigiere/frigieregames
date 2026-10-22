@@ -16,3 +16,4 @@
 - Immediate publication uses the database clock rather than the browser clock so device time skew cannot hide a newly published article.
 - Blog images use private Cloud storage and short-lived signed URLs generated only for visible articles; public buckets are blocked by workspace policy.
 - The root route owns the language provider, shared branded header, navigation and admin session state so both content routes remain consistent.
+- Electron bundles project icons and a local intro; direct desktop launches show the native intro, while in-launcher launches keep the web intro to avoid playing it twice.

@@ -1,7 +1,7 @@
 {
   "name": "frigieregameslauncher",
   "productName": "FRIGIEREGAMES LAUNCHER",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Launcher officiel Frigiere.games",
   "author": "Thomas F.",
   "main": "main.cjs",
@@ -9,7 +9,7 @@
   "devDependencies": { "electron": "^33.0.0", "electron-builder": "^25.1.8" },
   "build": {
     "appId": "games.frigiere.launcher",
-    "files": ["main.cjs", "preload.cjs", "build/icon.png"],
+    "files": ["main.cjs", "preload.cjs", "projects.cjs", "intro.html", "build/*.png", "build/*.ico"],
     "win": { "target": "nsis", "icon": "build/icon.ico", "artifactName": "frigieregameslauncher.exe" },
     "nsis": {
       "oneClick": false,
