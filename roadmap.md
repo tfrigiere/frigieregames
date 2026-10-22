@@ -8,6 +8,6 @@
 
 # Launcher
 - [x] Onglet DOWNLOAD LAUNCHER, version modifiable (1.0), DOWNLOAD FOR WINDOWS, popup. Bloqué: fichier .exe à compiler (lien à coller en admin).
-- [ ] Logiciel FRIGIEREGAMES LAUNCHER (icône PC = logo F) : installation, choix des jeux, progression, raccourcis bureau.
-- [ ] Mode logiciel : pas d'admin ni d'onglet download, boutons TÉLÉCHARGER JEU (poids, progression) → JOUER.
-- [ ] Cinématique « GAME/PRODUCT POWERED BY » + image du studio avant chaque jeu.
+- [x] Logiciel FRIGIEREGAMES LAUNCHER (icône PC = logo F) : installation, choix des jeux, progression, raccourcis bureau.
+- [x] Mode logiciel : pas d'admin ni d'onglet download, boutons TÉLÉCHARGER JEU (poids, progression) → JOUER.
+- [x] Cinématique « GAME/PRODUCT POWERED BY » + image du studio avant chaque jeu.
