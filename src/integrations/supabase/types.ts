@@ -35,6 +35,8 @@ export type Database = {
       blog_articles: {
         Row: {
           banner: string
+          banner_type: string
+          categories: string[]
           collaborators: Json
           content: Json
           created_at: string
@@ -46,6 +48,8 @@ export type Database = {
         }
         Insert: {
           banner?: string
+          banner_type?: string
+          categories?: string[]
           collaborators?: Json
           content?: Json
           created_at?: string
@@ -57,6 +61,8 @@ export type Database = {
         }
         Update: {
           banner?: string
+          banner_type?: string
+          categories?: string[]
           collaborators?: Json
           content?: Json
           created_at?: string
@@ -112,6 +118,7 @@ export type Database = {
       }
       custom_projects: {
         Row: {
+          builtin_id: string | null
           button: string
           created_at: string
           description: Json
@@ -120,10 +127,19 @@ export type Database = {
           images: Json
           langs: string[]
           link: string
+          logo: string
+          maintenance: boolean
+          maintenance_image: string
+          maintenance_until: string | null
           platforms: string[]
+          players_required: number | null
+          poster: string
+          publish_at: string | null
+          slides: Json
           title: string
         }
         Insert: {
+          builtin_id?: string | null
           button?: string
           created_at?: string
           description?: Json
@@ -132,10 +148,19 @@ export type Database = {
           images?: Json
           langs?: string[]
           link?: string
+          logo?: string
+          maintenance?: boolean
+          maintenance_image?: string
+          maintenance_until?: string | null
           platforms?: string[]
+          players_required?: number | null
+          poster?: string
+          publish_at?: string | null
+          slides?: Json
           title: string
         }
         Update: {
+          builtin_id?: string | null
           button?: string
           created_at?: string
           description?: Json
@@ -144,7 +169,15 @@ export type Database = {
           images?: Json
           langs?: string[]
           link?: string
+          logo?: string
+          maintenance?: boolean
+          maintenance_image?: string
+          maintenance_until?: string | null
           platforms?: string[]
+          players_required?: number | null
+          poster?: string
+          publish_at?: string | null
+          slides?: Json
           title?: string
         }
         Relationships: []
@@ -237,6 +270,7 @@ export type Database = {
     Functions: {
       blog_publication_time: { Args: never; Returns: string }
       consume_admin_attempt: { Args: { _key: string }; Returns: boolean }
+      project_publication_time: { Args: never; Returns: string }
       record_play: {
         Args: { _device_id: string; _project_id: string }
         Returns: {

@@ -1,0 +1,11 @@
+ALTER TABLE public.blog_articles ADD COLUMN IF NOT EXISTS banner_type text NOT NULL DEFAULT 'photo', ADD COLUMN IF NOT EXISTS categories text[] NOT NULL DEFAULT '{}';
+ALTER TABLE public.custom_projects ADD COLUMN IF NOT EXISTS builtin_id text UNIQUE, ADD COLUMN IF NOT EXISTS logo text NOT NULL DEFAULT '', ADD COLUMN IF NOT EXISTS slides jsonb NOT NULL DEFAULT '[]', ADD COLUMN IF NOT EXISTS publish_at timestamptz, ADD COLUMN IF NOT EXISTS poster text NOT NULL DEFAULT '', ADD COLUMN IF NOT EXISTS maintenance boolean NOT NULL DEFAULT false, ADD COLUMN IF NOT EXISTS maintenance_image text NOT NULL DEFAULT '', ADD COLUMN IF NOT EXISTS maintenance_until timestamptz, ADD COLUMN IF NOT EXISTS players_required integer;
+UPDATE public.custom_projects SET logo = COALESCE(images->>0, ''), images = CASE WHEN jsonb_array_length(images)>0 THEN images - 0 ELSE images END WHERE builtin_id IS NULL AND logo = '';
+GRANT SELECT ON public.custom_projects, public.blog_articles, public.blog_project_tags TO anon, authenticated;
+GRANT ALL ON public.custom_projects, public.blog_articles, public.blog_project_tags TO service_role;
+ALTER TABLE public.blog_articles ADD CONSTRAINT blog_banner_type_valid CHECK (banner_type IN ('photo','video'));
+ALTER TABLE public.blog_articles ADD CONSTRAINT blog_categories_valid CHECK (categories <@ ARRAY['changelog','sneak-peek','other']::text[]);
+ALTER TABLE public.custom_projects ADD CONSTRAINT builtin_project_valid CHECK (builtin_id IS NULL OR builtin_id IN ('monde','vacances','sourichat','airports'));
+ALTER TABLE public.custom_projects ADD CONSTRAINT players_required_valid CHECK (players_required IS NULL OR players_required BETWEEN 1 AND 100);
+CREATE OR REPLACE FUNCTION public.project_publication_time() RETURNS timestamptz LANGUAGE sql STABLE SET search_path = public AS $$ SELECT now(); $$;
+GRANT EXECUTE ON FUNCTION public.project_publication_time() TO anon, authenticated, service_role;

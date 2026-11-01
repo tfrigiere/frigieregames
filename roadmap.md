@@ -4,7 +4,14 @@
 - [x] Article : Titre → Image → Date → Collabs/Projets → séparateur → texte → images.
 
 # Projets (web)
-- [ ] Bouton admin vert « + Ajouter un projet » avec fenêtre en 4 catégories (titre, images + description riche, plateformes/langues/bouton PLAY-ACCÉDER, disponible en .exe).
+- [x] Bouton admin vert « + Ajouter un projet » avec fenêtre en 4 catégories.
+
+# Ajouts de novembre
+- [ ] Texte : tirets sans puces automatiques et Tab = 4 espaces.
+- [ ] Blog : bannière photo/vidéo, agrandissement des images, catégories et double filtre.
+- [ ] Projets : logo séparé, publication programmée avec affiche, projets disponibles dans le blog.
+- [ ] Édition de tous les projets : fondamentaux, galeries/banderoles, compléments, maintenance.
+- [ ] Tests des règles et vérification du parcours administrateur et visiteur.
 
 # Launcher
 - [x] Icônes officielles des projets et cinématique au lancement Bureau : tests automatisés et affichage vérifiés ; installation Windows à tester avec le prochain .exe GitHub.
