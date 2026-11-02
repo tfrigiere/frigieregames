@@ -1,5 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { Pencil } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useAdmin } from "@/components/AdminAccess";
+import { ProjectEditor } from "@/components/ProjectEditor";
+import { ProjectGallery,ProjectStatus,type ResolvedProject } from "@/components/ProjectPresentation";
+import { builtinDefaults } from "@/lib/projects/defaults";
+import { projectState } from "@/lib/blog/schema";
+import { TextContent } from "@/components/blog/ArticleView";
 import frigiereLogo from "@/assets/frigiere.png.asset.json";
 import mondeLogo from "@/assets/monde.png.asset.json";
 import vacancesLogo from "@/assets/vacances-logo.png.asset.json";
@@ -13,7 +21,7 @@ import { AirportsGallery } from "@/components/AirportsGallery";
 import { PlayButton } from "@/components/PlayButton";
 import { ProjectConditions } from "@/components/ProjectConditions";
 import { CommentsSection } from "@/components/CommentsSection";
-import { CustomProjects } from "@/components/CustomProjects";
+import { CustomProjects,useProjects,projectPreviews } from "@/components/CustomProjects";
 import { PromptShowcase } from "@/components/PromptShowcase";
 import { LangSwitch } from "@/components/LangSwitch";
 import { LangProvider, useLang, type fr as FrDict } from "@/lib/i18n";
@@ -151,7 +159,8 @@ function IndexPage() {
 
 function Index() {
   const [open, setOpen] = useState<string | null>(null);
-  const { t } = useLang();
+  const { t,lang } = useLang();
+  const {admin}=useAdmin();const q=useProjects();const [editing,setEditing]=useState<ResolvedProject|null>(null);
 
   return (
     <>
@@ -162,7 +171,7 @@ function Index() {
         </h1>
         <div className="space-y-5">
           {projects.map((p) => {
-            const isOpen = open === p.id;
+            const isOpen = open === p.id;const override=q.rows.find(r=>r.builtin_id===p.id);const effective=override||builtinDefaults[p.id];if(!effective)return null;const state=projectState(effective,q.now);const title=override?.title||p.name;
             return (
               <article
                 key={p.id}
@@ -175,13 +184,13 @@ function Index() {
                   className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-accent/10"
                 >
                   <img
-                    src={p.logo}
+                    src={override?.logo_url||p.logo}
                     alt={`Logo ${p.name}`}
                     className="h-14 w-14 shrink-0 object-contain"
                   />
                   <span className="flex flex-1 flex-wrap items-center gap-3">
                     <span className="text-lg font-bold text-card-foreground sm:text-xl">
-                      {p.name}
+                      {title}
                     </span>
                     {p.beta ? (
                       <span className="badge-beta">BETA</span>
@@ -202,19 +211,21 @@ function Index() {
                 >
                   <div className="overflow-hidden">
                     <div className="space-y-4 border-t border-border px-5 py-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                      {p.description(t)}
+                      {state!=='live'&&<ProjectStatus project={effective} now={q.now}/>}
+                      {override?<>{state==='live'&&<ProjectGallery slides={override.slides} urls={override.slide_urls}/>}<div className="article-text"><TextContent node={override.description}/></div></>:p.description(t)}
                       <ProjectConditions
-                        platforms={p.platforms(t)}
-                        langs={p.langs}
+                        platforms={override?override.platforms.map(v=>v==='pc'?'PC':lang==='fr'?'Téléphone':'Phone').join(' / '):p.platforms(t)}
+                        langs={override?.langs||p.langs}
                         players={p.players}
                       />
-                      <PlayButton
+                      {state==='live'?<PlayButton
                         projectId={p.id}
-                        link={p.link}
-                        name={p.name}
-                        label={p.id === "vacances" ? t("access") : undefined}
-                        variant={p.id === "vacances" ? "access" : "play"}
-                      />
+                        link={override?.link||p.link}
+                        name={title}
+                        label={(override?.button||effective.button)==="access"?t("access"):undefined}
+                        variant={override?.button||effective.button}
+                      />:<Button disabled className="w-full h-auto whitespace-normal">{state==='scheduled'&&effective.publish_at?new Date(effective.publish_at).toLocaleString(lang==='fr'?'fr-FR':'en-GB'):lang==='fr'?'En maintenance':'Under maintenance'}</Button>}
+                      {admin&&<Button onClick={()=>setEditing(override||{...effective})}><Pencil/>EDIT</Button>}
                       <CommentsSection projectId={p.id} />
                     </div>
                   </div>
@@ -264,6 +275,7 @@ function Index() {
         </article>
       </section>
 
+      {admin&&editing&&<ProjectEditor project={editing} previews={projectPreviews(editing)} onClose={()=>setEditing(null)} onSaved={()=>q.refetch()}/>}
       <PromptShowcase />
     </>
   );

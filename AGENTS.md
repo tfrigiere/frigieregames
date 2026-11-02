@@ -17,3 +17,6 @@
 - Blog images use private Cloud storage and short-lived signed URLs generated only for visible articles; public buckets are blocked by workspace policy.
 - The root route owns the language provider, shared branded header, navigation and admin session state so both content routes remain consistent.
 - Electron bundles project icons and a local intro; direct desktop launches show the native intro, while in-launcher launches keep the web intro to avoid playing it twice.
+- Existing projects retain their original localized presentation until an administrator saves a persisted builtin_id override; custom projects use the same validated editor so all changes share server authorization.
+- Project release state is computed from the database clock returned with project reads, refreshed periodically; maintenance is explicitly cleared by an administrator and its return date is an estimate.
+- Article and project media use the shared private bucket with signed previews; videos are validated by MIME and file signature before upload.
