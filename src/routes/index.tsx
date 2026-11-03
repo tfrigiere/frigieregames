@@ -177,11 +177,12 @@ function Index() {
                 key={p.id}
                 className="overflow-hidden rounded-2xl border border-border bg-card/70 shadow-elevated backdrop-blur"
               >
-                <button
+                <Button
+                  variant="ghost"
                   type="button"
                   onClick={() => setOpen(isOpen ? null : p.id)}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-accent/10"
+                  className="flex h-auto w-full items-center justify-start gap-4 px-5 py-4 text-left whitespace-normal transition-colors hover:bg-accent/10"
                 >
                   <img
                     src={override?.logo_url||p.logo}
@@ -204,7 +205,7 @@ function Index() {
                   >
                     ▼
                   </span>
-                </button>
+                </Button>
 
                 <div
                   className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
