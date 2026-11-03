@@ -49,7 +49,7 @@ export const listProjects=createServerFn({method:'GET'}).handler(async()=>{
  const {data,error}=await publicClient.from('custom_projects').select('*').order('created_at');if(error)throw new Error('Projets indisponibles');
  const resolve=async(v:string)=>{if(!v.startsWith('blog-media/'))return v;const {data:s}=await supabaseAdmin.storage.from('blog-media').createSignedUrl(v.slice(11),3600);return (s?.signedUrl||'').replace(url,import.meta.env['VITE_SUPABASE_URL']);};
  return {now:clock,projects:await Promise.all((data||[]).map(async p=>{
- const state=projectState(p,clock);const slides=(p.slides as {src:string;text:string;text_en?:string;color:string;font:'classic'|'ice'|'display'}[])||[];
+ const state=projectState(p,clock);const savedSlides=(p.slides as {src:string;text:string;text_en?:string;color:string;font:'classic'|'ice'|'display'}[])||[];const slides=savedSlides.length?savedSlides:(p.images as string[]).map(src=>({src,text:'',color:'#1675a9',font:'display' as const}));
  return {...p,link:!admin&&state!=='live'?'':p.link,slides,description:p.description as unknown as import('./schema').TextNode,logo_url:await resolve(p.logo),poster_url:await resolve(p.poster),maintenance_image_url:await resolve(p.maintenance_image),image_urls:await Promise.all((p.images as string[]).map(resolve)),slide_urls:await Promise.all(slides.map(s=>resolve(s.src)))};
  }))};
 });
